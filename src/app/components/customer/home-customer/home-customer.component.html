@@ -1,0 +1,78 @@
+<div class="banner">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="../../../../assets/img/banner/banner_ADIDAS.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../../../../assets/img/banner/banner_ADIDAS.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../../../../assets/img/banner/banner_ADIDAS.png" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<body>
+    <div class="container">
+        <div class="row header-product">
+            <div class="col-md-6">
+                <a (mousedown)="showMore()">Xem Thêm</a>
+            </div>
+        </div>
+        <h1>Sản phẩm mới nhất</h1>
+        <div class="body-product row">
+            <div class="card" style="width: 18rem;" *ngFor="let product of responseNewest.products">
+                <img [src]="product.productDetailList[0].imageList[0].url" class="card-img-top" alt="..."
+                    (mousedown)="goToDetail(product.id)">
+                <div class="card-body">
+                    <h5 class="card-title" (mousedown)="goToDetail(product.id)">{{product.productName}}</h5>
+                    <h6>
+                        {{ formatCurrency(getMinMaxPrice(product).minPrice) }} -
+                        {{ formatCurrency(getMinMaxPrice(product).maxPrice) }}
+                    </h6>
+                    <div class="btn-action">
+                        <!-- <button class="btn-cart" data-name="Mua" (mousedown)="goToDetail(product.id)"><i
+                                class="fa fa-shopping-cart"></i></button>
+                        <button class="btn-favorite" data-name="Yêu thích" (mousedown)="addFavorite(product.id)"><i
+                                class="fa fa-heart"></i></button> -->
+                        <button data-name="Xem Nhanh" class="btn-view"><i class="fa fa-eye" aria-hidden="true"
+                                (mousedown)="goToDetail(product.id)"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-products row">
+            <h2>Top Sản phẩm bán chạy</h2>
+            <div class="card" style="width: 18rem;" *ngFor="let product of topProducts.products">
+                <img [src]="product.productDetailList[0].imageList[0].url" class="card-img-top" alt="..."
+                    (mousedown)="goToDetail(product.id)">
+                <div class="card-body">
+                    <h5 class="card-title" (mousedown)="goToDetail(product.id)">{{product.productName}}</h5>
+                    <h6>
+                        {{ formatCurrency(getMinMaxPrice(product).minPrice) }} -
+                        {{ formatCurrency(getMinMaxPrice(product).maxPrice) }}
+                    </h6>
+                    <div class="btn-action">
+                        <!-- <button class="btn-cart" data-name="Mua" (mousedown)="goToDetail(product.id)"><i
+                                class="fa fa-shopping-cart"></i></button>
+                        <button class="btn-favorite" data-name="Yêu thích" (mousedown)="addFavorite(product.id)"><i
+                                class="fa fa-heart"></i></button> -->
+                        <button data-name="Xem Nhanh" class="btn-view"><i class="fa fa-eye" aria-hidden="true"
+                                (mousedown)="goToDetail(product.id)"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

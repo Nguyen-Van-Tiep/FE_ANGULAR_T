@@ -1,0 +1,137 @@
+<body>
+    <div class="container">
+        <div>
+            <h2>Thống kê</h2>
+        </div>
+        <div class="container-fluid">
+            <form (ngSubmit)="applyFilter(response.productName,response.month)">
+                <input type="text" [(ngModel)]="response.productName" name="productName" placeholder="Tên sản phẩm">
+                <input type="number" [(ngModel)]="response.month" name="month" placeholder="Tháng">
+                <button type="submit">Lọc</button>
+                <button style="margin-left: 20px;" class="custom-export-btn" (click)="exportToExcel(currentMonth)">
+                    <i class="fas fa-file-excel"></i> Export to Excel
+                </button>
+            </form>
+            <br />
+            <div id="filteredChart" *ngIf="showFilteredChart">
+                <canvasjs-chart [options]="filteredChartOptions"></canvasjs-chart>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <canvasjs-chart [options]="{
+                                        animationEnabled: true,
+                                        theme: 'light2',
+                                        title: { text: 'Doanh thu theo tháng' },
+                                        axisX: { title: 'Tháng' },
+                                        axisY: { title: 'Doanh thu', prefix: 'VND ' },
+                                        data: [{ type: 'column', dataPoints: monthlyRevenueData }]
+                                      }"></canvasjs-chart>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <canvasjs-chart [options]="{
+                                        animationEnabled: true,
+                                        theme: 'light2',
+                                        title: { text: 'Sản phẩm bán chạy' },
+                                        data: [{ type: 'pie', dataPoints: bestSellingProductsData }]
+                                      }"></canvasjs-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div style="margin-top: 20px;"></div>
+        <div class="statistics-container">
+            <table class="statistics-table">
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Sản phẩm</th>
+                        <th>Đơn thành công</th>
+                        <th>Đơn hủy</th>
+                        <th>Đơn trả</th>
+                        <th>Số tiền thu được</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ngày</td>
+                        <td>{{ dailyStatistics.totalBills || 0 }}</td>
+                        <td>{{ dailyStatistics.successOrders || 0 }}</td>
+                        <td>{{ dailyStatistics.canceledOrders || 0 }}</td>
+                        <td>{{ dailyStatistics.returnedOrders || 0 }}</td>
+                        <td>{{ dailyStatistics.totalAmount || 0 | currency:'VND' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tuần</td>
+                        <td>{{ weeklyStatistics.totalBills || 0 }}</td>
+                        <td>{{ weeklyStatistics.successOrders || 0 }}</td>
+                        <td>{{ weeklyStatistics.canceledOrders || 0 }}</td>
+                        <td>{{ weeklyStatistics.returnedOrders || 0 }}</td>
+                        <td>{{ weeklyStatistics.totalAmount || 0 | currency:'VND' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tháng</td>
+                        <td>{{ monthlyStatistics.totalBills || 0 }}</td>
+                        <td>{{ monthlyStatistics.successOrders || 0 }}</td>
+                        <td>{{ monthlyStatistics.canceledOrders || 0 }}</td>
+                        <td>{{ monthlyStatistics.returnedOrders || 0 }}</td>
+                        <td>{{ monthlyStatistics.totalAmount || 0 | currency:'VND' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Năm</td>
+                        <td>{{ yearlyStatistics.totalBills || 0 }}</td>
+                        <td>{{ yearlyStatistics.successOrders || 0 }}</td>
+                        <td>{{ yearlyStatistics.canceledOrders || 0 }}</td>
+                        <td>{{ yearlyStatistics.returnedOrders || 0 }}</td>
+                        <td>{{ yearlyStatistics.totalAmount || 0 | currency:'VND' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+
+        <div class="anh">
+            <h3>Bộ lọc</h3>
+            <div class="filter-buttons">
+                <button (click)="applyFilter2('day')">Ngày</button>
+                <button (click)="applyFilter2('week')">Tuần</button>
+                <button (click)="applyFilter2('month')">Tháng</button>
+                <button (click)="applyFilter2('year')">Năm</button>
+            </div>
+            <br />
+            <h3>Lọc theo khoảng thời gian</h3>
+            <label for="startDate">Ngày bắt đầu:</label>
+            <input type="date" id="startDate" [(ngModel)]="startDate">
+
+            <label for="endDate">Ngày kết thúc:</label>
+            <input type="date" id="endDate" [(ngModel)]="endDate">
+
+            <button (click)="applyFilter2('custom')">Lọc theo khoảng thời gian</button>
+            <br />
+            <h3>Danh sách sản phẩm bán chạy</h3>
+            <div *ngIf="filteredProducts">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng bán</th>
+                            <th>Giá của sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of filteredProducts">
+                            <td>{{ product.productName }}</td>
+                            <td>{{ product.soldQuantity }}</td>
+                            <td>{{ product.price | currency:'VND' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>

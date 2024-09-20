@@ -1,0 +1,201 @@
+<body>
+    <div class="container-fluid">
+        <p-table #dt [value]="response.products" dataKey="id" [rowHover]="true" [rows]="10"
+            [showCurrentPageReport]="true" [loading]="loading" [globalFilterFields]="[]">
+            <ng-template pTemplate="caption">
+                <div class="row justify-content-between">
+                    <div class="col-4">
+
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="fa fa-search"></i>
+                            <input pInputText type="text" placeholder="Tên giày" name="searchValue"
+                                [(ngModel)]="valueSearch" (change)="onSearch()" />
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <p-button label="Thêm mới" [outlined]="true" (onClick)="addProduct()" />
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr style="text-align: center;">
+                    <th style="min-width:4rem">
+                        <div class="flex align-items-center">
+                            STT
+                        </div>
+                    </th>
+                    <!-- <th style="width: 4rem">
+                    </th> -->
+                    <th style="min-width: 10rem">
+                        <div class="flex justify-content-between align-items-center">
+                            Tên sản phẩm
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-content-between align-items-center">
+                            Thương hiệu
+                        </div>
+                    </th>
+                    <th style="min-width: 8rem;">
+                        <div class="flex justify-content-between align-items-center">
+                            Danh mục
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem;">
+                        <div class="flex justify-content-between align-items-center">
+                            Chất liệu
+                        </div>
+                    </th>
+                    <th style="min-width: 10rem;">
+                        <div class="flex justify-content-between align-items-center">
+                            Đế giày
+                        </div>
+                    </th>
+                    <th style="min-width: 10rem;">
+                        <div class="flex justify-content-between align-items-center">
+                            Trạng thái
+                        </div>
+                    </th>
+                    <th style="min-width: 10rem;">
+                        <div class="flex justify-content-between align-items-center">
+                        </div>
+                    </th>
+                    <th style="width: 8rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr style="text-align: center;">
+                    <td style="text-align: center">
+                        {{ response.pagination.pageNumber * response.pagination.pageSize + i + 1 }}
+                    </td>
+                    <!-- <td>
+                        <img [src]="product.img" style="width: 120px; height: 120px;border-radius: 20px;" />
+                    </td> -->
+                    <td style="text-align: center">
+                        {{ product.productName }}
+                        <!-- <div class="p-size" style="font-size: 14px; font-weight: 500;">
+                            <label for="">mã sản phẩm: {{product.productCode}}</label>
+                        </div> -->
+                    </td>
+                    <td style="text-align: center">
+                        {{ product.brand.name }}
+                    </td>
+                    <td style="text-align: center">
+                        {{ product.style.name }}
+                    </td>
+                    <td style="text-align: center">
+                        {{ product.material.name }}
+                    </td>
+                    <td style="text-align: center">
+                        {{ product.sole.name}}
+                    </td>
+                    <td style="text-align: center">
+                        <p *ngIf="product.status == 0" class="bg-danger text-white p-2 rounded"> Ngưng hoạt động</p>
+                        <p *ngIf="product.status == 1" class="bg-success text-white p-2 rounded"> Hoạt động</p>
+                    </td>
+                    <td style="text-align: center">
+                        <p-inputSwitch [trueValue]="1" [falseValue]="0" [(ngModel)]="product.status"
+                            (onChange)="onStatusChange(product)">
+                        </p-inputSwitch>
+                    </td>
+                    <td style="text-align: center">
+                        <!-- <button class="btn-update"><i class="fa fa-pencil" aria-hidden="true"
+                                (mousedown)="btnUpdate(product.id)"></i></button> -->
+
+                        <p-button [pTooltip]="tooltipBtnLock" severity="help" tooltipPosition="bottom" class="btn-lock"
+                            icon="fa-solid fa-pen-to-square" (mousedown)="btnUpdate(product.id)">
+                            <ng-template #tooltipBtnLock>
+                                <div class="flex align-items-center">
+                                    <span> Chỉnh sửa</span>
+                                </div>
+                            </ng-template>
+                        </p-button>
+                        <p-button [pTooltip]="tooltipBtnRemove" severity="danger" tooltipPosition="bottom"
+                            class="btn-remove" icon="fa-solid fa-map-location-dot" (mousedown)="goToDetails(product.id)">
+                            <ng-template #tooltipBtnRemove>
+                                <div class="flex align-items-center">
+                                    <span> Xem chi tiết</span>
+                                </div>
+                            </ng-template>
+                        </p-button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="12">
+                        <p-paginator (onPageChange)="paginate($event)" [first]="0" [rows]="response.pagination.pageSize"
+                            [totalRecords]="response.pagination.pageTotal" [showCurrentPageReport]="true"
+                            [class.ui-paginator-top]="true" [totalRecords]="response.pagination.pageTotal" />
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</body>
+
+
+<p-dialog header="Thông tin hãng" [(visible)]="visible" [style]="{ width: '50rem' }">
+    <div class="title">
+        <h5>Thông Tin Chung</h5>
+    </div>
+    <div class="row">
+        <label for="validationCustom01" class="form-label">Tên sản phẩm <span style="color: red;">*</span></label>
+        <input type="text" name="name" class="form-control" id="validationCustom01"
+            placeholder="Tên Sản phẩm" [(ngModel)]="product.productName" required>
+        <div *ngIf="productNameError" class="error-message">{{ productNameError }}</div>
+        <!-- <small>Tên sản phẩm là bắt buộc và nên là tên duy nhất.</small> -->
+    </div>
+    <div class="row">
+        <label for="validationCustom02" class="form-label">Mô tả sản phẩm</label>
+        <textarea rows="5" cols="30" name="desciption" pInputTextarea
+            [(ngModel)]="product.description"></textarea>
+        <div *ngIf="descriptionError" class="error-message">{{ descriptionError }}</div>
+        <small>Đặt mô tả cho sản phẩm để hiển thị tốt hơn.</small>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="title">
+                <span>Danh mục</span> <span style="color: red;">*</span>
+            </div>
+            <p-dropdown [options]="styles" [(ngModel)]="product.style" optionLabel="name"
+                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn danh mục">
+            </p-dropdown>
+            <div *ngIf="selectedStyleError" class="error-message">{{ selectedStyleError }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class="title">
+                <span>Thương hiệu</span> <span style="color: red;">*</span>
+            </div>
+            <p-dropdown [options]="brands" [(ngModel)]="product.brand" optionLabel="name"
+                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn thương hiệu">
+            </p-dropdown>
+            <div *ngIf="selectedBrandError" class="error-message">{{ selectedBrandError }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="title">
+                <span>Đế giày</span> <span style="color: red;">*</span>
+            </div>
+            <p-dropdown [options]="soles" [(ngModel)]="product.sole" optionLabel="name" [filter]="true"
+                filterBy="name" [showClear]="true" placeholder="Chọn đế giày">
+            </p-dropdown>
+            <div *ngIf="selectedSoleError" class="error-message">{{ selectedSoleError }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class="title">
+                <span>Chất liệu</span> <span style="color: red;">*</span>
+            </div>
+            <p-dropdown [options]="materials" [(ngModel)]="product.material" optionLabel="name"
+                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn chất liệu">
+            </p-dropdown>
+            <div *ngIf="selectedMaterialError" class="error-message">{{ selectedMaterialError }}</div>
+        </div>
+    </div>
+    <br>
+    <div class="flex justify-content-end gap-2 button-group">
+        <p-button label="Cancel" severity="secondary" (onClick)="visible = false" />
+        <p-button label="Save" (onClick)="update()"/>
+    </div>
+</p-dialog>

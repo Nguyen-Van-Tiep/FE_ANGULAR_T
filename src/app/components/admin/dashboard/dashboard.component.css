@@ -1,0 +1,126 @@
+body {
+  display: flex;
+  justify-content: center;
+  transform: translate(21%, 30px);
+  background-color: #f1f1f1;
+  width: 80%;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: brown;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+/* .container-fluid {
+  padding: 20px;
+  background-color: #f8f9fa;
+} */
+.anh {
+  margin: 20px; /* Khoảng cách bên ngoài của lớp */
+  margin-right: 1100px;
+  width: 60%;
+}
+
+.filter-buttons {
+  margin-bottom: 20px; /* Khoảng cách giữa các nút lọc và bảng sản phẩm */
+}
+
+.filter-buttons button {
+  margin-right: 10px; /* Khoảng cách giữa các nút lọc */
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse; /* Để loại bỏ khoảng cách giữa các ô */
+}
+
+.products-table th,
+.products-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.products-table th {
+  background-color: #f2f2f2;
+}
+
+.products-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.products-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.statistics-container {
+  display: flex;
+  margin-right: 300px;
+  max-width: 1200px;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statistics-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.statistics-table th,
+.statistics-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.statistics-table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.statistics-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.statistics-table tr:hover {
+  background-color: #e9ecef;
+}
+
+.statistics-table td {
+  font-size: 14px;
+  color: #495057;
+}
+
+.statistics-table .currency {
+  font-weight: bold;
+  color: #28a745;
+}
+
+@media (max-width: 768px) {
+  .statistics-container {
+    padding: 10px;
+  }
+
+  .statistics-table {
+    font-size: 12px;
+  }
+}

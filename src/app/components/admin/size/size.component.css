@@ -1,0 +1,152 @@
+body {
+    display: flex;
+    justify-content: center;
+    transform: translate(21%, 30px);
+    /* background-color: antiquewhite; */
+    width: 80%;
+    margin-top: 50px;
+  }
+  
+  body p-table ::ng-deep .p-datatable {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+    .p-datatable-header {
+      background-color: transparent;
+      .col-4 {
+        position: relative;
+        p-button {
+          position: absolute;
+          left: auto;
+          right: 10px;
+  
+          button {
+            border-radius: 10px;
+            height: 40px;
+            font-family: Quickstand, sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+          }
+  
+          button:hover {
+            background-color: #2196f3;
+            font-weight: 600;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            color: white;
+          }
+        }
+  
+        input {
+          border-radius: 10px;
+          border: 1px solid #ced4da;
+          height: 40px;
+          padding-left: 30px;
+        }
+      }
+    }
+  
+    .p-paginator {
+      background-color: transparent;
+  
+      ul {
+        padding-left: 0 !important;
+      }
+    }
+  }
+  /* Căn chỉnh label và input */
+label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Căn chỉnh khoảng cách giữa các thành phần */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.mb-5 {
+  margin-bottom: 1.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+/* Căn chỉnh div theo cột */
+.row {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Đảm bảo chiếm đủ chiều rộng */
+}
+
+.col-3, .col-4, .col-5 {
+  flex: 1; /* Chia đều không gian giữa các cột */
+}
+
+.col-4, .col-5 {
+  display: flex;
+  align-items: center;
+}
+
+/* Căn chỉnh trạng thái */
+.bg-danger {
+  background-color: #dc3545;
+}
+
+.bg-success {
+  background-color: #28a745;
+}
+
+.text-white {
+  color: white;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+/* Căn chỉnh switch và trạng thái thành một hàng */
+.col-4 p, .col-5 p-inputSwitch {
+  margin-bottom: 0;
+}
+
+/* Điều chỉnh vị trí nút bấm */
+.button-group {
+  display: flex;
+  justify-content: flex-end; /* Đẩy các nút sang phải */
+  gap: 1rem; /* Khoảng cách giữa các nút */
+  margin-top: 1rem;
+}
+
+/* Hiệu chỉnh p-dialog */
+p-dialog {
+  border-radius: 8px;
+}
+
+p-dialog .ui-dialog-titlebar {
+  background-color: #007bff;
+  color: #fff;
+}
+
+p-dialog .ui-dialog {
+  border-radius: 8px;
+}
+
+p-dialog .ui-dialog-content {
+  padding: 2rem;
+}
+
+/* Hiệu chỉnh lỗi */
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+}
+p{
+  width: 437px;
+  }

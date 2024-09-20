@@ -1,0 +1,388 @@
+@import "../../../../../../node_modules/quill/dist/quill.core.css";
+@import "../../../../../../node_modules/quill/dist/quill.snow.css";
+/* .file-input-container {
+    margin-bottom: 20px;
+}
+
+.file-input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+    margin-bottom: 10px;
+} */
+ /* Căn chỉnh cột chọn file */
+.ui-table .p-fileupload {
+  vertical-align: middle;
+}
+
+/* Căn chỉnh hàng và cột */
+.ui-table td, .ui-table th {
+  vertical-align: middle;
+}
+
+/* Nếu cần, điều chỉnh chiều rộng của cột ảnh để phù hợp với nội dung */
+.ui-table td:nth-child(6) {
+  width: 40rem; /* Điều chỉnh chiều rộng của cột ảnh nếu cần */
+}
+
+/* Căn chỉnh các biến thể và cột ảnh */
+.ui-table .p-fileupload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  transform: translate(21%, 30px);
+  /* background-color: antiquewhite; */
+  width: 100%;
+  margin-top: 0px;
+
+  .card {
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+  }
+
+  /* .product-img {
+        button {
+            height: 25px;
+            width: 25px;
+            justify-content: center;
+            display: flex;
+            border-radius: 20px;
+            border-color: transparent;
+            background-color: white;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+            color: #6c757d;
+            transform: translate(70px, 15px);
+        }
+
+        .remove-image {
+            transform: translate(70px, -15px);
+        }
+
+        .remove-image:hover {
+            color: white;
+            background-color: #ff4d4f;
+            border-color: transparent;
+        }
+
+        button:hover {
+            color: white;
+            background-color: #3B82F6;
+            border-color: transparent;
+        }
+
+        .product-image {
+            border-radius: 20px;
+            width: 150px;
+            height: 150px;
+            padding: 0;
+            margin: 0;
+
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            span {
+                font-size: 12px;
+                color: #6c757d;
+                font-weight: 500;
+                font-family: Quickstand, sans-serif;
+                margin-top: 15px;
+            }
+        }
+    } */
+  .error-message {
+    color: red;
+  }
+  .brand-status {
+    margin-top: 20px;
+
+    .title-status {
+      font-size: 12px;
+      color: #6c757d;
+      font-weight: 500;
+      font-family: Quickstand, sans-serif;
+      margin-top: 15px;
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .title {
+      font-size: 16px;
+      color: #6c757d;
+      font-weight: 600;
+      font-family: Quickstand, sans-serif;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .input-group-prepend {
+      margin-top: 5px;
+
+      .input-group-text {
+        background-color: transparent;
+        border-color: transparent;
+        cursor: pointer;
+
+        input {
+          margin-right: 5px !important;
+        }
+      }
+
+      .input-group-text:hover {
+        /* background-color: antiquewhite; */
+        color: #ff4d4f;
+        font-weight: 600;
+        border: 3px solid #ffffff;
+        box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .type-product {
+      margin-top: 0px !important;
+    }
+  }
+
+  .col-9 {
+    position: relative;
+  }
+}
+
+.col-9 p-tabview ::ng-deep .p-tabview {
+  .p-tabview-nav-content {
+    width: 80%;
+    background-color: transparent;
+    border-color: transparent;
+
+    .p-tabview-nav {
+      background-color: transparent;
+      border-color: transparent;
+      padding: 0 !important;
+    }
+
+    ul {
+      li {
+        background-color: transparent;
+        border-color: transparent;
+        margin-right: 20px;
+
+        a {
+          color: #6c757d;
+          font-weight: 600;
+          font-family: Quickstand, sans-serif;
+          font-size: 16px;
+          text-decoration: none;
+          background-color: transparent;
+        }
+
+        a:hover {
+          color: #3b82f6;
+        }
+      }
+
+      .p-highlight a {
+        color: #3b82f6 !important;
+      }
+    }
+  }
+
+  .p-tabview-panels {
+    /* border-radius: 20px;
+        border: 3px solid #ffffff;
+        box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05); */
+    background-color: transparent !important;
+    padding: 0;
+
+    /* .card{
+            margin: 0 !important;
+            margin-top: 20px !important;
+
+            h5{
+                font-size: 20px;
+                color: black;
+                font-weight: 600;
+                font-family: Quickstand, sans-serif;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .row{
+                input{
+                    width: 98%;
+                    font-size: 16px;
+                    color: black;
+                    font-weight: 500;
+                    font-family: Quickstand, sans-serif;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    margin-left: 15px;
+                }
+                small{
+                    font-size: 12px;
+                    color: #6c757d;
+                    font-weight: 500;
+                    font-family: Quickstand, sans-serif;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    margin-left: 15px;
+                
+                }
+
+                label{
+                    font-size: 16px;
+                    color: #6c757d;
+                    font-weight: 600;
+                    font-family: Quickstand, sans-serif;
+                    
+                    span{
+                        color: #ff4d4f;
+                    }
+                }
+            }
+        } */
+  }
+}
+
+/* .col-md-9 p-button {  
+    left: auto;
+    right: 0;
+    cursor: pointer;
+    z-index: 2;
+    margin-top: 15px;
+
+    button {
+        color: #6c757d;
+        font-weight: 500;
+        font-family: Quickstand, sans-serif;
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+    button:hover {
+        color: #3B82F6;
+        font-weight: 600;
+    }
+
+} */
+
+.col-9 p-fileupload {
+  /* .p-fileupload-advanced{
+        border-radius: 20px;
+        border: 1px solid #ced4da;
+    }
+
+    .p-fileupload-buttonbar,.p-fileupload-content{
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+    .p-fileupload-buttonbar{
+        button{
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+    } */
+
+  .btn-attachment {
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+  }
+
+  .btn-clear-file {
+    color: #ef4444;
+    border: 1px solid #ef4444;
+  }
+
+  .btn-attachment:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .btn-clear-file:hover {
+    background-color: #ef4444;
+    color: white;
+  }
+
+  .btn-clear-file:disabled {
+    opacity: 0.5;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    background-color: white;
+  }
+
+  .demo-image {
+    display: flex;
+    justify-content: center;
+
+    .ng-image {
+      border-radius: 20px;
+      width: 120px;
+      height: 120px;
+      margin-right: 10px;
+      position: relative;
+
+      img {
+        border-radius: 20px;
+        width: 120px;
+        height: 120px;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ced4da;
+      }
+      p-button {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0;
+        margin: 0;
+
+        button {
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          margin: 0;
+        }
+      }
+      p-button:hover {
+        background-color: red;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+<body class="container-xxl">
+    <div class="wrapper">
+        <app-side-bar-profile class="side-bar"></app-side-bar-profile>
+        <section class="order-detail">
+            <p-panel [toggleable]="false">
+                <ng-template pTemplate="header">
+                    <div class="header-page">
+                        <div class="row justify-content-between header-filter">
+
+                            <div class="col-4 ">
+                                <!-- <p-button label="Success" icon="fa fa-sign-out" [text]="true" [raised]="true" severity="success" /> -->
+                                <button class="btn-goback" (mousedown)="goBack()">
+                                    <i class="fa fa-sign-out" style="transform: rotate(-180deg);"
+                                        aria-hidden="true"></i>
+                                    <span>Quay Lại</span></button>
+                            </div>
+                            <div class="col-4 label-header">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="label-order-code">
+                                        <label for="">Mã Đơn Hàng: </label>
+                                        <span class="s-order-code">{{response.orderCode}}</span>
+                                    </div>
+                                    <div style="margin-left: 10px;">
+                                        <span class="s-order-status">{{response.status}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="body">
+                    <div class="stepper-wrapper">
+                        <div *ngFor="let step of response.generals" class="stepper-item {{step.status}}">
+                            <div class="step-counter"><i [class]="'fa ' + step.icon" aria-hidden="true"></i></div>
+                            <div class="step-name">{{ step.stepName }}</div>
+                            <div class="step-time">{{ step.timeStep }}</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row order-info">
+                        <div class="col-md-4 info-detail">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Thông tin Đơn Hàng</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <!-- <li class="list-group-item">
+                                            <label for="">Phương thức thanh toán</label>
+                                            <p>{{response.paymentMethod}}</p>
+                                        </li> -->
+                                        <li class="list-group-item">
+                                            <label for="">Phí vận chuyển</label>
+                                            <p>{{ response.fee.toString()|
+                                                currency:'VND':'symbol':'1.0-0' }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label for="">Đơn giá</label>
+                                            <p>{{ response.price.toString()|
+                                                currency:'VND':'symbol':'1.0-0' }}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label for="">Tổng tiền</label>
+                                            <p>{{ response.sumPrice.toString()|
+                                                currency:'VND':'symbol':'1.0-0' }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Địa chỉ nhận hàng</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <label for="">Họ tên</label>
+                                            <p>{{response.fullName}}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label for="">số điện thoại</label>
+                                            <p>{{response.numberPhone}}</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <label for="">Địa chỉ</label>
+                                            <p>{{response.fullAddress}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p-scrollPanel [style]="{ width: '100%', height: '750px' }">
+                                <p-timeline [value]="response.details" align="left" styleClass="customized-timeline">
+                                    <ng-template pTemplate="marker" let-timeline>
+                                        <span class="flex align-items-center justify-content-center text-white ">
+                                            <i [class]="'fa ' + timeline.icon" aria-hidden="true"></i>
+                                        </span>
+                                    </ng-template>
+                                    <ng-template pTemplate="content" let-timeline>
+                                        <p-card [header]="timeline.stepName" [subheader]="timeline.stepDate">
+                                            <p>
+                                                {{timeline.description}}
+                                            </p>
+                                        </p-card>
+                                    </ng-template>
+                                </p-timeline>
+                            </p-scrollPanel>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <p-panel [toggleable]="false">
+                            <ng-template pTemplate="header">
+                                <p-table [value]="response.products" [tableStyle]="{ 'min-width': '50rem' }">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th></th>
+                                            <th style="text-align: center;">Tên sản phẩm</th>
+                                            <th style="text-align: center;">kích thước</th>
+                                            <th style="text-align: center;">số lượng</th>
+                                            <th style="text-align: center;">Đơn giá</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-product>
+                                        <tr>
+                                            <td style="text-align: center;"><img
+                                                    [src]="product.productImage == null ? '../../../../assets/img/background/blank-image.svg' : product.productImage"
+                                                    style="height: 82px; width: 82px; border-radius: 20px;" /></td>
+                                            <td style="text-align: center;">{{product.productName }}</td>
+                                            <td style="text-align: center;">{{ product.size }}</td>
+                                            <td style="text-align: center;">{{ product.quantity }}</td>
+                                            <td style="text-align: center;">{{ product.price.toString()|
+                                                currency:'VND':'symbol':'1.0-0' }}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </ng-template>
+                        </p-panel>
+                    </div>
+                </ng-template>
+                <p-toast />
+            </p-panel>
+        </section>
+    </div>
+</body>

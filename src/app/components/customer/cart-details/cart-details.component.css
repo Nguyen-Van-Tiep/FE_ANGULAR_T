@@ -1,0 +1,272 @@
+body {
+  margin-top: 30px;
+  background-color: #e8e8e8;
+}
+
+.cart-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.item-select {
+  flex: 0 0 5%;
+}
+
+.item-image {
+  flex: 0 0 15%;
+}
+
+.item-image img {
+  width: 80px; /* Điều chỉnh chiều rộng của ảnh */
+  height: 100px; /* Điều chỉnh chiều cao của ảnh */
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.item-size-color {
+  flex: 0 0 20%;
+  font-size: 18px;
+  color: #555;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.item-size-color .size {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.item-size-color .color {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.item-quantity {
+  flex: 0 0 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.item-price {
+  flex: 0 0 15%;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.item-actions {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.change-options-btn {
+  background-color: #ffc107;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.change-options-btn:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Style cho checkbox */
+.item-select input[type="checkbox"],
+.select-all-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.item-select input[type="checkbox"]:checked,
+.select-all-checkbox:checked {
+  background-color: #007bff;
+}
+
+.item-select input[type="checkbox"]::after,
+.select-all-checkbox::after {
+  content: "✔";
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  display: none;
+}
+
+.item-select input[type="checkbox"]:checked::after,
+.select-all-checkbox:checked::after {
+  display: block;
+}
+
+/* Style cho tổng tiền và nút thanh toán */
+.total {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.total h5 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.checkout-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #218838;
+}
+
+/* Style cho dialog */
+.p-dialog {
+  border-radius: 8px; /* Làm mềm các góc của dialog */
+}
+
+.p-dialog-header {
+  background-color: #007bff; /* Màu nền của header */
+  color: white; /* Màu chữ trong header */
+  border-top-left-radius: 8px; /* Làm mềm góc trên bên trái */
+  border-top-right-radius: 8px; /* Làm mềm góc trên bên phải */
+}
+
+.p-dialog-footer {
+  border-bottom-left-radius: 8px; /* Làm mềm góc dưới bên trái */
+  border-bottom-right-radius: 8px; /* Làm mềm góc dưới bên phải */
+}
+
+/* Style cho các input trong dialog */
+.p-inputtext {
+  border-radius: 4px; /* Làm mềm các góc của input */
+  border: 1px solid #ced4da; /* Border cho input */
+  padding: 0.5rem; /* Khoảng cách giữa nội dung và border */
+}
+
+/* Style cho các nút trong dialog */
+.p-button {
+  border-radius: 4px; /* Làm mềm các góc của nút */
+  padding: 0.5rem 1rem; /* Khoảng cách giữa nội dung và viền nút */
+}
+
+.p-button-secondary {
+  background-color: #6c757d; /* Màu nền của nút phụ */
+  color: white; /* Màu chữ của nút phụ */
+}
+
+.p-button-secondary:hover {
+  background-color: #5a6268; /* Màu nền khi hover nút phụ */
+}
+
+.p-button-primary {
+  background-color: #007bff; /* Màu nền của nút chính */
+  color: white; /* Màu chữ của nút chính */
+}
+
+.p-button-primary:hover {
+  background-color: #0056b3; /* Màu nền khi hover nút chính */
+}
+
+/* Style cho các label trong dialog */
+.font-semibold {
+  font-weight: 600; /* Đậm chữ */
+}
+
+/* Cải thiện spacing và alignment */
+.flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center; /* Căn chỉnh dọc giữa các phần tử */
+}
+
+.gap-3 {
+  gap: 1rem; /* Khoảng cách giữa các phần tử trong flex container */
+}
+
+.mb-3 {
+  margin-bottom: 1rem; /* Khoảng cách dưới của các phần tử */
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem; /* Khoảng cách dưới của các phần tử */
+}
+
+.flex-auto {
+  flex: 1; /* Flex grow */
+}
+
+.w-6rem {
+  width: 6rem; /* Chiều rộng cố định cho label */
+}
+
+.justify-content-end {
+  justify-content: flex-end; /* Căn chỉnh các phần tử sang bên phải trong flex container */
+}
+
+.p-text-secondary {
+  color: #6c757d; /* Màu chữ phụ */
+}

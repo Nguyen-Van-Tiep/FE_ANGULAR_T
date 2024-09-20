@@ -1,0 +1,483 @@
+<body class="container-xxl">
+    <div class="wrapper">
+        <app-side-bar-profile class="side-bar"></app-side-bar-profile>
+        <section>
+            <p-tabView (onChange)="changeStatus($event, pd, wt, tp, fn)">
+                <p-tabPanel header="Đang xử lý" class="p-note" style="height: auto;">
+                    <p-table #pd [value]="filteredUsers" dataKey="id" [rowHover]="true" [loading]="loading"
+                        [globalFilterFields]="['code','customerName', 'createdBy', 'numberPhone', 'total', 'price','status','createdDate']"
+                        (onSort)="onSort($event)">,
+                        <ng-template pTemplate="caption">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="fa fa-search"></i>
+                                        <input pInputText type="text" placeholder="mã hóa đơn"
+                                            (input)="applyFilterGlobal($event)" (change)="getBills()" id="search-input"
+                                            br name="searchValue" [(ngModel)]="searchValue" />
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear"
+                                        (click)="clearFilter(pd)" />
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr style="text-align: center;">
+                                <th pSortableColumn="code" style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        mã hóa đơn
+                                        <p-sortIcon field="code" />
+                                    </div>
+                                </th>
+                                <th pSortableColumn="customerName" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="customerName" />
+                                        Họ và tên
+                                    </div>
+                                </th>
+                                <th pSortableColumn="numberPhone" style="min-width: 8rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="numberPhone" />
+                                        Số điện thoại
+                                    </div>
+                                </th>
+                                <th pSortableColumn="total" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="total" />
+                                        số lượng
+                                    </div>
+                                </th>
+                                <th pSortableColumn="price" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="price" />
+                                        Đơn giá (VND)
+                                    </div>
+                                </th>
+                                <th pSortableColumn="status" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="status" />
+                                        trạng thái
+                                    </div>
+                                </th>
+                                <th pSortableColumn="createdDate" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="createdDate" />
+                                        ngày tạo
+                                    </div>
+                                </th>
+                                <th style="min-width: 20rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        ghi chú
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-bill>
+                            <tr class="p-selectable-row" style="text-align: center;"
+                                (mousedown)="gotoDetail(bill.code)">
+                                <td style="text-align: center">
+                                    <span class="p-column-title">code</span>
+                                    {{ bill.code }}
+                                </td>
+                                <td class="product_name" style="text-align: center">
+                                    <span class="p-column-title">customerName</span>
+                                    {{ bill.customerName }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">numberPhone</span>
+                                    {{ bill.numberPhone }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">total</span>
+                                    {{ bill.total }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">Đơn giá</span>
+                                    {{ bill.price.toString()| number:'1.0-0' }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">status</span>
+                                    {{ bill.status}}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">createdDate</span>
+                                    {{ bill.createdDate}}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">note</span>
+                                    {{ bill.note }}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="7">
+                                    <p-paginator (onPageChange)="paginate($event)" [first]="0"
+                                        [rows]="response.pagination.pageSize"
+                                        [totalRecords]="response.pagination.pageTotal" [showCurrentPageReport]="true"
+                                        [class.ui-paginator-top]="true" [rowsPerPageOptions]="[10,25,50]"
+                                        currentPageReportTemplate="Hiển thị {{response.pagination.pageFirst}} đến {{response.pagination.pageLast}} trên {{response.pagination.pageTotal}} thương hiệu"
+                                        [totalRecords]="response.pagination.pageTotal" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+                <p-tabPanel header="Chờ Vận Chuyển" class="p-note" style="height: auto;">
+                    <p-table #wt [value]="filteredUsers" dataKey="id" [rowHover]="true" [loading]="loading"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['code', 'customerName', 'numberPhone', 'total', 'price','status', 'modifiedBy','modifiedDate']"
+                        (onSort)="onSort($event)">
+                        <ng-template pTemplate="caption">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="fa fa-search"></i>
+                                        <input pInputText type="text" placeholder="mã hóa đơn"
+                                            (input)="applyFilterGlobal($event)" (change)="getBills()" id="search-input"
+                                            br name="searchValue" [(ngModel)]="searchValue" />
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear"
+                                        (click)="clearFilter(wt)" />
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr style="text-align: center;">
+                                <th pSortableColumn="code" style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="code" />
+                                        mã hóa đơn
+                                    </div>
+                                </th>
+                                <th pSortableColumn="customerName" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="customerName" />
+                                        Họ và tên
+                                    </div>
+                                </th>
+                                <th pSortableColumn="numberPhone" style="min-width: 8rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="numberPhone" />
+                                        Số điện thoại
+                                    </div>
+                                </th>
+                                <th pSortableColumn="total" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="total" />
+                                        số lượng
+                                    </div>
+                                </th>
+                                <th pSortableColumn="price" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="price" />
+                                        Đơn giá (VND)
+                                    </div>
+                                </th>
+                                <th pSortableColumn="status" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="status" />
+                                        Trạng thái
+                                    </div>
+                                </th>
+                                <th pSortableColumn="modifiedBy" style="min-width: 6rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="modifiedBy" />
+                                        người xác nhận
+                                    </div>
+                                </th>
+                                <th pSortableColumn="modifiedDate" style="min-width: 6rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="modifiedDate" />
+                                        ngày xác nhận
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-bill>
+                            <tr class="p-selectable-row" style="text-align: center;"
+                                (mousedown)="gotoDetail(bill.code)">
+                                <td style="text-align: center">
+                                    <span class="p-column-title">code</span>
+                                    {{ bill.code }}
+                                </td>
+                                <td class="product_name" style="text-align: center">
+                                    <span class="p-column-title">customerName</span>
+                                    {{ bill.customerName }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">numberPhone</span>
+                                    {{ bill.numberPhone }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">total</span>
+                                    {{ bill.total }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">price</span>
+                                    {{ bill.price.toString()| number:'1.0-0' }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">status</span>
+                                    {{ bill.status}}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">modifiedBy</span>
+                                    {{ bill.modifiedBy}}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">modifiedDate</span>
+                                    {{ bill.modifiedDate }}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="7">
+                                    <p-paginator (onPageChange)="paginate($event)" [first]="0"
+                                        [rows]="response.pagination.pageSize"
+                                        [totalRecords]="response.pagination.pageTotal" [showCurrentPageReport]="true"
+                                        [class.ui-paginator-top]="true" [rowsPerPageOptions]="[10,25,50]"
+                                        currentPageReportTemplate="Hiển thị {{response.pagination.pageFirst}} đến {{response.pagination.pageLast}} trên {{response.pagination.pageTotal}} thương hiệu"
+                                        [totalRecords]="response.pagination.pageTotal" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+                <p-tabPanel header="Đang Vận Chuyển" class="p-note" style="height: auto;">
+                    <p-table #tp [value]="filteredUsers" dataKey="id" [rowHover]="true" [loading]="loading"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['code', 'customerName', 'numberPhone', 'total', 'price', 'status','estimatedDeliveryDate']"
+                        (onSort)="onSort($event)">
+                        <ng-template pTemplate="caption">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="fa fa-search"></i>
+                                        <input pInputText type="text" placeholder="mã hóa đơn"
+                                            (input)="applyFilterGlobal($event)" (change)="getBills()" id="search-input"
+                                            br name="searchValue" [(ngModel)]="searchValue" />
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear"
+                                        (click)="clearFilter(tp)" />
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr style="text-align: center;">
+                                <th pSortableColumn="code" style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="code" />
+                                        mã hóa đơn
+                                    </div>
+                                </th>
+                                <th pSortableColumn="customerName" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="customerName" />
+                                        Họ và tên
+                                    </div>
+                                </th>
+                                <th pSortableColumn="numberPhone" style="min-width: 8rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="numberPhone" />
+                                        Số điện thoại
+                                    </div>
+                                </th>
+                                <th pSortableColumn="total" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="total" />
+                                        số lượng
+                                    </div>
+                                </th>
+                                <th pSortableColumn="price" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="price" />
+                                        Đơn giá (VND)
+                                    </div>
+                                </th>
+                                <th pSortableColumn="status" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="status" />
+                                        Trạng thái
+                                    </div>
+                                </th>
+                                <th pSortableColumn="estimatedDeliveryDate" style="min-width: 12rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="estimatedDeliveryDate" />
+                                        thời gian nhận
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-bill>
+                            <tr class="p-selectable-row" style="text-align: center;"
+                                (mousedown)="gotoDetail(bill.code)">
+                                <td style="text-align: center">
+                                    <span class="p-column-title">code</span>
+                                    {{ bill.code }}
+                                </td>
+                                <td class="product_name" style="text-align: center">
+                                    <span class="p-column-title">customerName</span>
+                                    {{ bill.customerName }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">phone</span>
+                                    {{ bill.numberPhone }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">total</span>
+                                    {{ bill.total }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">price</span>
+                                    {{ bill.price.toString()| number:'1.0-0' }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">status</span>
+                                    {{ bill.status }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">receiveDate</span>
+                                    {{ bill.receiveDate }}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="7">
+                                    <p-paginator (onPageChange)="paginate($event)" [first]="0"
+                                        [rows]="response.pagination.pageSize"
+                                        [totalRecords]="response.pagination.pageTotal" [showCurrentPageReport]="true"
+                                        [class.ui-paginator-top]="true" [rowsPerPageOptions]="[10,25,50]"
+                                        currentPageReportTemplate="Hiển thị {{response.pagination.pageFirst}} đến {{response.pagination.pageLast}} trên {{response.pagination.pageTotal}} thương hiệu"
+                                        [totalRecords]="response.pagination.pageTotal" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+                <p-tabPanel header="Hoàn Thành" class="p-note" style="height: auto;">
+                    <p-table #fn [value]="filteredUsers" dataKey="id" [rowHover]="true" [loading]="loading"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['code','customerName', 'createdBy', 'numberPhone', 'total', 'price','createdDate']"
+                        (onSort)="onSort($event)">
+                        <ng-template pTemplate="caption">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="fa fa-search"></i>
+                                        <input pInputText type="text" placeholder="mã hóa đơn"
+                                            (input)="applyFilterGlobal($event)" (change)="getBills()" id="search-input"
+                                            br name="searchValue" [(ngModel)]="searchValue" />
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear"
+                                        (click)="clearFilter(fn)" />
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr style="text-align: center;">
+                                <th pSortableColumn="code" style="min-width: 10rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="code" />
+                                        mã hóa đơn
+                                    </div>
+                                </th>
+                                <th pSortableColumn="customerName" style="min-width: 14rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="customerName" />
+                                        Họ và tên
+                                    </div>
+                                </th>
+                                <th pSortableColumn="numberPhone" style="min-width: 8rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="numberPhone" />
+                                        Số điện thoại
+                                    </div>
+                                </th>
+                                <th pSortableColumn="total" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="total" />
+                                        số lượng
+                                    </div>
+                                </th>
+                                <th pSortableColumn="price" style="min-width: 10rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="price" />
+                                        Đơn giá (VND)
+                                    </div>
+                                </th>
+                                <th pSortableColumn="status" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="status" />
+                                        trạng thái
+                                    </div>
+                                </th>
+                                <th pSortableColumn="modifiedDate" style="min-width: 8rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        <p-sortIcon field="modifiedDate" />
+                                        ngày hoàn thành
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-bill>
+                            <tr class="p-selectable-row" style="text-align: center;"
+                                (mousedown)="gotoDetail(bill.code)">
+                                <td style="text-align: center">
+                                    <span class="p-column-title">code</span>
+                                    {{ bill.code }}
+                                </td>
+                                <td class="product_name" style="text-align: center">
+                                    <span class="p-column-title">customerName</span>
+                                    {{ bill.customerName }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">numberPhone</span>
+                                    {{ bill.numberPhone }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">total</span>
+                                    {{ bill.total }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">Đơn giá</span>
+                                    {{ bill.price.toString()| number:'1.0-0' }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">status</span>
+                                    {{ bill.status}}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">createdDate</span>
+                                    {{ bill.createdDate}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="7">
+                                    <p-paginator (onPageChange)="paginate($event)" [first]="0"
+                                        [rows]="response.pagination.pageSize"
+                                        [totalRecords]="response.pagination.pageTotal" [showCurrentPageReport]="true"
+                                        [class.ui-paginator-top]="true" [rowsPerPageOptions]="[10,25,50]"
+                                        currentPageReportTemplate="Hiển thị {{response.pagination.pageFirst}} đến {{response.pagination.pageLast}} trên {{response.pagination.pageTotal}} thương hiệu"
+                                        [totalRecords]="response.pagination.pageTotal" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel>
+            </p-tabView>
+        </section>
+    </div>
+</body>

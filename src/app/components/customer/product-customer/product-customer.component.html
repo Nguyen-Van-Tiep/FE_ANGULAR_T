@@ -1,0 +1,111 @@
+<body class="body-product">
+    <br>
+    <div class="container">
+        <div class="row">
+            <!-- side part filter -->
+            <div class="col-md-3 side-bar-filter">
+                <p-card header="Lọc Sản Phẩm">
+                    <div class="row f-brand">
+                        <div class="col-md-12">
+                            <label class="title">Hãng</label>
+                            <div *ngFor="let brand of brands" class="field-checkbox">
+                                <p-checkbox [(ngModel)]="selectBrands" [label]="brand.name"
+                                    (ngModelChange)="onSelectBrand($event)" name="group" [value]="brand" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row f-style">
+                        <div class="col-md-12">
+                            <label class="title">Kiểu dáng</label>
+                            <div *ngFor="let style of styles" class="field-checkbox">
+                                <p-checkbox [(ngModel)]="selectStyles" [label]="style.name"
+                                    (ngModelChange)="onSelectStyle($event)" name="group" [value]="style" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row f-style">
+                        <div class="col-md-12">
+                            <label class="title">Đế giày</label>
+                            <div *ngFor="let sole of soles" class="field-checkbox">
+                                <p-checkbox [(ngModel)]="selectSoles" [label]="sole.name"
+                                    (ngModelChange)="onSelectSole($event)" name="group" [value]="sole" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row f-style">
+                        <div class="col-md-12">
+                            <label class="title">Chất liệu</label>
+                            <div *ngFor="let material of materials" class="field-checkbox">
+                                <p-checkbox [(ngModel)]="selectMaterials" [label]="material.name"
+                                    (ngModelChange)="onSelectmaterial($event)" name="group" [value]="material" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row f-price">
+                        <div class="col-md-12">
+                            <label class="title">Khoảng Giá (VND)</label>
+                            <div class="group-from">
+                                <p-inputNumber [(ngModel)]="min" mode="currency" class="form-control"
+                                    id="validationCustom01" inputId="currency-vietnam" currency="VND" locale="de-DE"
+                                    [min]="0" />
+                                <span style="margin: 0 !important;"><i class="fa fa-minus"></i></span>
+                                <p-inputNumber [(ngModel)]="max" mode="currency" class="form-control"
+                                    id="validationCustom01" inputId="currency-vietnam" currency="VND" locale="de-DE"
+                                    [min]="0" />
+                            </div>
+                            <button (click)="onChangePrice()" class="btn btn-primary mt-2">Lọc Theo Giá</button>
+                        </div>
+                    </div>
+
+                    <br>
+                    <button class="btn-clear-filter" (mousedown)="clear()">Xóa Bộ Lọc</button>
+                </p-card>
+            </div>
+            <!-- body product -->
+            <div class="col-md-9 products">
+
+                <div class="row">
+                    <div class="col-md-3 card" *ngFor="let product of response.products">
+                        <img [src]="product.productDetailList[0].imageList[0].url" class="card-img-top" alt="..."
+                            (mousedown)="goToDetail(product.id)">
+                        <div class="card-body">
+                            <h5 class="card-title" (mousedown)="goToDetail(product.id)">{{product.productName}}
+                            </h5>
+                            <h6 *ngIf="getMinMaxPrice(product).minPrice == getMinMaxPrice(product).maxPrice">
+                                {{ formatCurrency(getMinMaxPrice(product).maxPrice) }}
+                            </h6>
+                            <h6 *ngIf="getMinMaxPrice(product).minPrice < getMinMaxPrice(product).maxPrice">
+                                {{ formatCurrency(getMinMaxPrice(product).minPrice) }} -
+                                {{ formatCurrency(getMinMaxPrice(product).maxPrice) }}
+                            </h6>
+                            <div class="btn-action">
+                                <button data-name="Xem Nhanh" class="btn-view"><i class="fa fa-eye"
+                                        aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item" [class.disabled]="response.pagination.pageNumber === 0">
+                    <a class="page-link" (click)="previousPage()">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li *ngFor="let p of response.pagination.pages" class="page-item"
+                    [class.active]="p === response.pagination.pageNumber+1">
+                    <a class="page-link" (click)="goToPage(p)">{{ p }}</a>
+                </li>
+                <li class="page-item"
+                    [class.disabled]="response.pagination.pageNumber+1 === response.pagination.pages.length">
+                    <a class="page-link" (click)="nextPage()">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>

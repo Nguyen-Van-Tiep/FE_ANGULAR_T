@@ -1,0 +1,212 @@
+*{
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+.side-part ::ng-deep .p-panel .p-panel-header{
+    display: contents;
+}
+
+
+.side-part ::ng-deep .p-panel .p-panel-content{
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+}
+
+.user-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Hai cột: một cột cho p-avatar, một cột cho user-title */
+    align-items: center; /* Canh các phần tử theo trục chính */
+  }
+
+.user-title{
+    margin-left: 10px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+}
+
+.user-title h5{
+    font-weight: 600;
+}
+
+.card{
+    margin-top: 20px;
+    border-color: transparent;
+    background-color: transparent;
+    position: relative;
+}
+
+::ng-deep .card .p-panelmenu-panel .p-panelmenu-header-content{
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: transform 0.3s ease;
+    perspective: 1000px; /* Đặt điểm nhìn */
+}
+::ng-deep .card .p-panelmenu-panel .p-panelmenu-header-content a{
+    text-decoration: none;
+    color: black;
+}
+
+::ng-deep .card .p-panelmenu-panel .p-panelmenu-header-content:hover{
+    color: white;
+    background-color: red;
+    border-radius: 20px;
+    border-color: bisque;
+    transform: translateY(-5px) rotateX(10deg);
+}
+
+::ng-deep .card .p-panelmenu-panel .p-panelmenu-header-content a:hover{
+    color: white;
+}
+
+::ng-deep .card .p-panelmenu-panel .p-panelmenu-header-content span{
+    text-decoration: none !important;
+}
+
+::ng-deep .card .p-panelmenu-panel:last-child .p-panelmenu-header .p-panelmenu-header-content{
+    margin: 0 !important;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-header-action {
+    display: flex;
+    align-items: center;
+  }
+  
+  ::ng-deep .p-panelmenu .p-panelmenu-header-action .p-panelmenu-header-text {
+    order: 1;
+  }
+  
+  ::ng-deep .p-panelmenu .p-panelmenu-header-action chevronrighticon {
+    order: 2;
+    margin-left: auto; /* Đẩy icon dropdown về phía cuối của button */
+  }
+
+  ::ng-deep .p-panelmenu .p-highlight chevrondownicon  {
+    order: 2;
+    margin-left: auto;
+  }
+
+  ::ng-deep .card .p-panelmenu-panel ul li a{
+    text-decoration: none;
+  }
+
+  ::ng-deep .p-panelmenu-panel:not(.p-toggleable-content) .p-highlight .p-panelmenu-header-content{
+    border-radius: 20px !important;
+    background-color: red !important;
+    margin-bottom: 10px !important;
+    border-color: bisque;
+  }
+
+  ::ng-deep .p-panelmenu-panel:has(.p-toggleable-content) .p-highlight .p-panelmenu-header-content{
+    border-radius: 20px 20px 0px 0px !important;
+    background-color: white !important;
+    margin-bottom: 0 !important;
+    border: 1px solid #ced4da;
+    border-bottom-color: transparent !important;
+  }
+
+  ::ng-deep .p-panelmenu-panel:has(.p-toggleable-content) .p-highlight .p-panelmenu-header-content a{
+    color: black !important;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content span{
+    color: black;
+  }
+
+  ::ng-deep .p-panelmenu-panel:has(.p-highlight) .p-toggleable-content{
+    margin-bottom: 10px;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content .p-panelmenu-content{
+    background-color: white;
+    border-radius: 0px 0px 20px 20px;
+    border: 1px solid #ced4da;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul li{
+    border-radius: 10px;
+    background-color: transparent !important;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul a{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    margin-top: 5px;
+    transition: transform 0.3s ease;
+    perspective: 1000px; /* Đặt điểm nhìn */
+  }
+
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul .p-focus a span{
+    color: white;
+  }
+
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul .p-focus li{
+    background-color: transparent;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul .p-focus a{
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+  }
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul li:hover a{
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    transform: translateY(-5px) rotateX(10deg);
+  }
+
+  ::ng-deep .p-panelmenu-panel .p-toggleable-content ul li:hover a span{
+    color: white;
+  }
+
+  ::ng-deep .p-panelmenu .p-highlight .p-panelmenu-header-content a{
+    color: white !important;
+  }
+
+  body ::ng-deep p-dialog{
+    form p-floatlabel span{
+      margin-bottom: 30px;
+      input {
+        width: 100%;
+      }
+    }
+
+    p-password .p-password{
+      width: 100%;
+      input{
+        border-radius: 20px;
+      }
+    }
+
+    .p-dialog-header{
+      border-radius: 20px 20px 0px 0px;
+    }
+    .p-dialog-content{
+      overflow: visible;
+      border-radius: 0px 0px 20px 20px;
+    }
+
+    .footer-dialog button{
+      border: 1px solid #ced4da !important;
+      font-family: Quickstand, sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      height: 36px !important;
+      margin-left: 10px !important;
+      color: white !important;
+    }
+
+    .btn-cancel{
+      background-color: red;
+    }
+
+    .btn-done{
+      background-color: greenyellow;
+    }
+
+    .btn-cancel:hover{
+      background-color: crimson;
+    }
+
+    .btn-done:hover{
+      background-color: green;
+    }
+  }

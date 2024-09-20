@@ -1,0 +1,135 @@
+<body class="container-xxl">
+  <div class="wrapper">
+    <app-side-bar-profile class="side-bar"></app-side-bar-profile>
+    <section>
+      <p-panel [toggleable]="false">
+        <ng-template pTemplate="header">
+          <div>
+            <h4>Địa chỉ</h4>
+            <span>Quản lý địa chỉ</span>
+          </div>
+          <p-button *ngIf="isPayment" label="Quay Lại" class="go-back-payment" (mousedown)="goBack()" iconPos="right" />
+          <button (click)="showDialog()">Thêm địa chỉ</button>
+        </ng-template>
+        <ng-template pTemplate="body">
+          <div *ngFor="let address of response.addresses">
+            <div class="card">
+              <p-panel [toggleable]="false">
+                <ng-template pTemplate="header">
+                  <div class="s-address">
+                    <h5>{{address.fullName}}</h5>
+                    <span>{{address.numberPhone}}</span>
+                    <p-tag *ngIf="address.isDefault" severity="success" value="Mặc Định" [rounded]="true" />
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="body">
+                  {{address.address}}
+                </ng-template>
+                <ng-template pTemplate="footer">
+                  <div class="row justify-content-end">
+                    <button class="col-md-3 btn-default" *ngIf="!address.isDefault"
+                      (mousedown)="setAsDefault(address)">Đặt
+                      Làm mặc định</button>
+                    <button class="col-md-2 btn-edit" (mousedown)="btnUpdate(address.id)">chỉnh sửa</button>
+                    <button class="col-md-1 btn-remove"
+                      (mousedown)="confirmRemoveAddress($event,address.id)">xóa</button>
+                  </div>
+                </ng-template>
+              </p-panel>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item" [class.disabled]="response.pagination.pageNumber === 0">
+                <a class="page-link" (click)="previousPage()">
+                  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li *ngFor="let p of response.pagination.pages" class="page-item"
+                [class.active]="p === response.pagination.pageNumber+1">
+                <a class="page-link" (click)="goToPage(p)">{{ p }}</a>
+              </li>
+              <li class="page-item"
+                [class.disabled]="response.pagination.pageNumber+1 === response.pagination.pages.length">
+                <a class="page-link" (click)="nextPage()">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </ng-template>
+        <p-toast />
+      </p-panel>
+    </section>
+  </div>
+</body>
+
+<p-dialog header="Địa Chỉ Mới" [modal]="true" [(visible)]="isVisible" [style]="{ width: '50rem' }" (onHide)="reset()">
+  <div class="row">
+    <div class="col-md-6">
+      <p-floatLabel>
+        <input pInputText id="fullName" name="fullName" [(ngModel)]="request.fullName" />
+        <label for="fullName">Họ và Tên</label>
+      </p-floatLabel>
+    </div>
+    <div class="col-md-6">
+      <p-floatLabel>
+        <input pInputText id="numberPhone" name="numberPhone" [(ngModel)]="request.numberPhone" />
+        <label for="numberPhone">Số điện thoại</label>
+      </p-floatLabel>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="citySelect">Tỉnh/Thành phố</label>
+    <select id="citySelect" (change)="onCityChange($event)" [(ngModel)]="selectedProvinceID">
+      <option *ngFor="let city of cities" [value]="city.ProvinceID">{{ city.ProvinceName }}</option>
+      <option *ngIf="cities.length === 0">No cities available</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label for="districtSelect">Quận/Huyện</label>
+    <select id="districtSelect" (change)="onDistrictChange($event)" *ngIf="districts.length > 0"
+      [(ngModel)]="selectedDistrictID">
+      <option *ngFor="let district of districts" [value]="district.DistrictID">{{
+        district.DistrictName }}</option>
+      <option *ngIf="districts.length === 0">No districts available</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label for="wardSelect">Xã/Phường</label>
+    <select id="wardSelect" (change)="onWardChange($event)" *ngIf="wards.length > 0" [(ngModel)]="selectedWardCode">
+      <option *ngFor="let ward of wards" [value]="ward.WardCode">{{
+        ward.WardName }}</option>
+      <option *ngIf="wards.length === 0">No wards available</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <p-floatLabel>
+      <textarea pInputText id="address" rows="5" cols="30" name="address" [(ngModel)]="request.address" pInputTextarea
+        [autoResize]="true"></textarea>
+      <label for="address">Địa chỉ cụ thể</label>
+    </p-floatLabel>
+  </div>
+  <div class="row">
+    <label class="l-type-address">Loại Địa Chỉ</label>
+    <p-selectButton [options]="addressType" [(ngModel)]="typeSelected" [multiple]="false" optionLabel="name"
+      optionValue="value" />
+  </div>
+  <div class="row">
+    <p-inputSwitch [(ngModel)]="request.isDefault" [disabled]="disableDefault"
+      pTooltip="Bạn không thể xoá nhãn Địa chỉ mặc định. Hãy đặt địa chỉ khác làm Địa chỉ mặc định của bạn nhé."
+      tooltipPosition="top" [tooltipDisabled]="!disableDefault" />
+    <span class="s-default">đặt làm địa chỉ mặc định</span>
+  </div>
+
+  <div class="row justify-content-end footer-dialog">
+    <button class="col-md-2 btn-cancel" (click)="isVisible = false">Quay Lại</button>
+    <button class="col-md-2 btn-done" (click)="saveAddress()">Hoàn Thành</button>
+  </div>
+</p-dialog>

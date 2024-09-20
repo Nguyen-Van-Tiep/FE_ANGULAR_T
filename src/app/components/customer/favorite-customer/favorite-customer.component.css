@@ -1,0 +1,163 @@
+.body-favorite {
+    background-color: antiquewhite;
+    padding: 100px 0px;
+    font-family: Quickstand, sans-serif;
+    .title-page {
+        margin-bottom: 20px;
+
+        h4 {
+            font-weight: 600;
+        }
+    }
+
+    .data-product {
+        .card {
+            flex: 0 0 auto;
+            /* Cố định kích thước của mỗi card */
+            margin: 10px;
+            /* Khoảng cách giữa các card */
+            position: relative;
+            /* Đặt vị trí của card là relative */
+            overflow: hidden;
+            /* Ngăn nội dung tràn ra ngoài */
+            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+            padding: 0;
+            border-radius: 20px;
+            width: 23%;
+        }
+
+        .card p {
+            box-sizing: border-box;
+            /* Đảm bảo padding không làm tăng kích thước của nội dung */
+            word-wrap: break-word;
+            /* Tự động xuống dòng khi cần thiết */
+        }
+
+        .card .card-body {
+            word-wrap: break-word;
+            box-sizing: border-box;
+            /* Đảm bảo padding không làm tăng kích thước của nội dung */
+            white-space: normal;
+        }
+
+        .card img {
+            height: 292px;
+        }
+
+        .card:hover {
+            /* border-color: aqua; */
+            background-color: antiquewhite;
+            box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.5);
+        }
+
+        .card .card-body p span {
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .card .card-body h6 {
+            color: red;
+        }
+
+        .card .card-body h5 {
+            cursor: pointer;
+        }
+
+        .card .card-body h5:hover {
+            color: red;
+        }
+
+        .card .card-body .btn-action .btn-favorite{
+            background-color: red;
+            color: white;
+        }
+        .card .card-body .btn-action .btn-favorite:hover {
+            background-color: #ced4da;
+            margin-right: 90px;
+            color: black;
+        }
+
+        .card .card-body .btn-action .btn-view:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .card .card-body .btn-action .btn-cart:hover {
+            background-color: red;
+            margin-right: 60px;
+            color: white;
+        }
+
+        .card .card-body .btn-action button {
+            margin-right: 10px;
+            height: 36px;
+            width: 36px;
+            border-radius: 20px;
+            background-color: antiquewhite;
+            border-color: transparent;
+            transition: margin-right 0.5s ease;
+            position: relative;
+            /* Thêm thuộc tính position: relative để tạo context cho các pseudo-element */
+            white-space: nowrap;
+        }
+
+        .card .card-body .btn-action button::before {
+            content: attr(data-name);
+            /* Hiển thị giá trị của thuộc tính data-name */
+            position: absolute;
+            /* Tạo pseudo-element tương đối với button cha */
+            top: 50%;
+            /* Đặt ở giữa theo chiều dọc */
+            left: calc(100% + 10px);
+            /* Đặt phía sau button và có khoảng cách 10px */
+            transform: translateY(-50%);
+            /* Dịch chuyển về phía trên */
+            padding: 5px;
+            /* Khoảng cách với nội dung */
+            color: black;
+            opacity: 0;
+            /* Ẩn ban đầu */
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            /* Ngăn các sự kiện click trên pseudo-element */
+        }
+
+        .card .card-body .btn-action button:hover::before {
+            opacity: 1;
+            /* Hiển thị khi hover */
+        }
+    }
+
+    nav{
+        ul{
+            transform: translate(-20px, 10px);
+        }
+        ul li {
+            margin-right: 5px;
+
+            a {
+                height: 36px;
+                width: 36px;
+                border-radius: 20px;
+                font-family: Quickstand, sans-serif;
+                font-weight: 600;
+                font-size: 16px;
+                color: black;
+                border: 1px solid #ced4da;
+                cursor: pointer;
+                border-radius: 20px !important;
+            }
+
+            a:hover {
+                color: white;
+                background-color: red;
+            }
+        }
+
+        .page-item.active a {
+            color: white;
+            background-color: red;
+        }
+    }
+}

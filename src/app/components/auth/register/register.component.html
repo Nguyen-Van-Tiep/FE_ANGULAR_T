@@ -1,0 +1,76 @@
+<section class="vh-100">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng ký</p>
+                                <form class="mx-1 mx-md-4" autocomplete="off" (ngSubmit)="register()">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <span class="p-float-label">
+                                            <input pInputText id="username" [(ngModel)]="request.username"
+                                                (ngModelChange)="validateUsername($event)"
+                                                [ngModelOptions]="{standalone: true}" />
+                                            <label for="username">Tài khoản</label>
+                                            <div *ngIf="usernameError" class="error-message">{{ usernameError }}</div>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <span class="p-float-label">
+                                            <input pInputText id="email" [(ngModel)]="request.email"
+                                                (ngModelChange)="validateEmail($event)"
+                                                [ngModelOptions]="{standalone: true}" />
+                                            <label for="email">Email</label>
+                                            <div *ngIf="emailError" class="error-message">{{ emailError }}</div>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                                        <span class="p-float-label">
+                                            <input pInputText id="number-phone" [(ngModel)]="request.numberPhone"
+                                                (ngModelChange)="validatePhoneNumber($event)"
+                                                [ngModelOptions]="{standalone: true}" />
+                                            <label for="number-phone">số điện thoại</label>
+                                            <div *ngIf="phoneError" class="error-message">{{ phoneError }}</div>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <span class="p-float-label">
+                                            <input pInputText type="password" id="password"
+                                                [(ngModel)]="request.password" [ngModelOptions]="{standalone: true}" />
+                                            <label for="password">Mật khẩu</label>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <span class="p-float-label">
+                                            <input pInputText type="password" id="confirm-password"
+                                                [(ngModel)]="confirmPassword" (ngModelChange)="validatePasswords()"
+                                                [ngModelOptions]="{standalone: true}" />
+                                            <label for="confirm-password">Xác Nhận mật khẩu</label>
+                                            <div *ngIf="passwordError" class="error-message">{{ passwordError }}</div>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4 b-action">
+                                        <p-button label="Xác Nhận" [loading]="loading" [disabled]="!isFormValid()"
+                                            severity="success" type="submit"></p-button>
+                                        <p-button label="Quay Lại" severity="danger" (onClick)="goBack()"></p-button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <img src="../../../../assets/img/background/register.webp" class="img-fluid"
+                                    alt="Sample image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

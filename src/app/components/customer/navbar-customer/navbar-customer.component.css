@@ -1,0 +1,209 @@
+body {
+  height: 84px;
+  width: 100%;
+  background-color: bisque;
+}
+
+.logo img {
+  height: 80px;
+  background-color: transparent;
+  position: relative;
+}
+
+nav .menu ul li a {
+  font-family: Quickstand, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 40px;
+}
+
+nav .menu ul li a:hover {
+  font-family: Quickstand, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 40px;
+  color: red;
+}
+
+.search-container {
+  position: absolute;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 13px;
+  cursor: pointer;
+}
+
+.search-container input {
+  height: 44px;
+  width: 173px;
+  border-radius: 20px;
+}
+
+.fa-custom-size {
+  font-size: 1.7em; /* hoặc giá trị cụ thể nếu bạn muốn */
+}
+
+.search-container input[type="text"] {
+  padding-left: 50px; /* Điều chỉnh khoảng cách bên trái */
+}
+
+/* .col-md-3 .container{
+    display: ruby-text;
+} */
+
+.icon-custom-size {
+  font-size: 1.25em; /* hoặc giá trị cụ thể nếu bạn muốn */
+}
+
+.col-md-4 .container ul li {
+  padding: 3px 10px;
+}
+
+.col-md-4 .container ul li a:hover {
+  color: red;
+}
+
+.overlay-cart ::ng-deep .p-overlaypanel {
+  /* width: 450px !important; */
+  /* left: 1433.95px !important; */
+  border-radius: 20px;
+  --overlayArrowLeft: 10%;
+  position: absolute !important;
+  /* display: flex !important; */
+}
+
+.cartProducts {
+  margin: 10px 0px;
+  padding: 0px;
+}
+
+.cartProducts .product-name {
+  font-family: Quickstand, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cartProducts .product-name:hover {
+  color: red;
+}
+
+.cartProducts .price {
+  font-family: Quickstand, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: red;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.cartProducts li {
+  margin: 10px 0px;
+}
+ul {
+  list-style-type: none; /* Loại bỏ các dấu đầu dòng */
+}
+
+.infoCart button {
+  height: 40px;
+  border-radius: 20px;
+  border-color: transparent;
+  background-color: bisque;
+  font-family: Quickstand, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 60px;
+  width: 120px;
+}
+
+.infoCart {
+  align-items: center;
+  width: 400px;
+}
+
+.cartProducts li:hover {
+  background-color: antiquewhite;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.infoCart button:hover {
+  background-color: red;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  /* position: initial !important; */
+  top: 50px;
+  left: 1620px;
+  width: 220px;
+  left: auto;
+  right: 10px;
+}
+::ng-deep .p-overlaypanel-content li a {
+  cursor: pointer;
+}
+.dropdown-menu li a:hover {
+  background-color: bisque;
+  cursor: pointer;
+}
+
+.dropdown-menu li i {
+  height: 24px;
+  width: 24px;
+  margin-right: 10px;
+}
+
+.no-login {
+  align-items: center;
+  display: grid;
+  justify-content: center;
+}
+
+.no-login button {
+  background-color: bisque;
+  height: 36px;
+  border-radius: 20px;
+  border-color: transparent;
+  font-family: Quickstand, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.no-login button:hover {
+  background-color: red;
+  color: white;
+  font-weight: 600;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item {
+  position: relative;
+}
+
+::ng-deep .p-overlay-badge .p-badge {
+  /* font-size: 10px; */
+  height: 20px;
+  margin-left: 10px !important;
+  margin-bottom: 10px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
+  transform: translate(70%, -70%) !important;
+}
+
+.logo img {
+  width: 150px; /* Thay đổi kích thước theo nhu cầu */
+  height: 150px; /* Đảm bảo chiều cao và chiều rộng bằng nhau */
+  border-radius: 50%; /* Tạo hình tròn */
+  object-fit: cover; /* Cắt ảnh để phù hợp với kích thước hình tròn */
+}

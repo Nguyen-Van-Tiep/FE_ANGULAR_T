@@ -1,0 +1,46 @@
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+            <h1>Đăng Nhập</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            </div>
+            <span>hoặc đăng nhập bằng tài khoản</span>
+            <input type="text" placeholder="Tài Khoản" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"
+                required />
+            <input type="password" placeholder="Mật Khẩu" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+                required />
+            <a (mousedown)="showDialog()">Quên mật khẩu?</a>
+            <button>Đăng Nhập</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Xin Chào, Bạn!</h1>
+                <p>Nhập thông tin cá nhân của bạn và bắt đầu hành trình cùng chúng tôi.</p>
+                <!-- <button class="ghost" id="signUp" (mousedown)="goRegister()">Đăng Ký</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>
+
+<p-dialog header="Quên mật khẩu" [modal]="true" [(visible)]="isForgot" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Vui lòng nhập chính xác thông tin yêu cầu.</span>
+    <br>
+    <br>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label for="username" class="font-semibold w-6rem">Tài khoản</label>
+        <input pInputText id="username" class="flex-auto" [(ngModel)]="username" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label for="email" class="font-semibold w-6rem">Email</label>
+        <input pInputText id="email" class="flex-auto" [(ngModel)]="email" autocomplete="off" />
+    </div>
+    <div class="row justify-content-end btn-confirm-rate">
+        <button class="col-md-3 btn-edit" (mousedown)="close()">Hủy</button>
+        <button class="col-md-5 btn-default" (mousedown)="submit()" [disabled]="disableSubmitButton()">Xác Nhận</button>
+    </div>
+</p-dialog>

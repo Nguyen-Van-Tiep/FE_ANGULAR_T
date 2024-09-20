@@ -1,0 +1,509 @@
+.side-bar {
+  grid-column: span 4;
+}
+
+body {
+  background-color: #e8e8e8;
+  display: grid;
+  width: 100%;
+  padding: 12px;
+  margin-top: 100px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* Chia thành 12 cột bằng nhau */
+  grid-gap: 43px;
+}
+
+section {
+  grid-column: span 8;
+}
+
+section p-panel {
+  margin: 0;
+}
+
+section p-panel ::ng-deep .p-panel {
+  background-color: transparent;
+  border-radius: 20px;
+  border-color: #ced4da;
+
+  .p-panel-footer {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0px;
+
+    ul li {
+      margin-right: 5px;
+
+      a {
+        height: 36px;
+        width: 36px;
+        border-radius: 20px;
+        font-family: Quickstand, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+      }
+
+      a:hover {
+        color: white;
+        background-color: red;
+      }
+    }
+
+    .page-item.active a {
+      color: white;
+      background-color: red;
+    }
+  }
+
+  .p-panel-header {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0 !important;
+
+    button {
+      background-color: white;
+      border: 1px solid #ced4da;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 20px;
+      height: 36px;
+      align-items: center;
+      display: flex;
+    }
+
+    button:hover {
+      background-color: red;
+      color: white;
+      border-color: transparent;
+    }
+
+    .header-page {
+      padding: 0 !important;
+
+      .header-filter {
+        margin-top: 40px;
+        position: relative;
+        height: 36px;
+
+        .btn-goback {
+          width: 130px;
+          font-family: Quickstand, sans-serif;
+          font-weight: 600;
+          font-size: 18px;
+          justify-content: center;
+          box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+            0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+          i {
+            margin-right: 5px;
+          }
+
+          span {
+            font-family: Quickstand, sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+          }
+        }
+
+        .label-header {
+          transform: translate(52%, 10px);
+          font-family: Quickstand, sans-serif;
+          font-weight: 600;
+          font-size: 16px;
+
+          label {
+            margin-right: 10px;
+          }
+
+          .label-order-code {
+            border-right: 3px solid #ced4da;
+            padding-right: 10px;
+          }
+
+          .s-order-code {
+            font-family: Quickstand, sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: tomato;
+          }
+
+          .s-order-status {
+            font-family: Quickstand, sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #2563eb;
+          }
+        }
+      }
+    }
+  }
+
+  .p-panel-content {
+    position: relative;
+
+    .price {
+      right: 0;
+      left: auto;
+      position: absolute;
+    }
+  }
+
+  .p-panel .p-panel-footer {
+    padding: 10px;
+  }
+
+  .stepper-wrapper {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .stepper-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+
+      i {
+        color: white;
+        font-size: 3rem;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
+    }
+
+    .stepper-item::before {
+      position: absolute;
+      content: "";
+      border-bottom: 5px solid #ccc;
+      width: 100%;
+      top: 50px;
+      left: -50%;
+      z-index: 2;
+    }
+
+    .stepper-item::after {
+      position: absolute;
+      content: "";
+      border-bottom: 5px solid #ccc;
+      width: 100%;
+      top: 50px;
+      left: 50%;
+      z-index: 2;
+    }
+
+    .stepper-item {
+      .step-counter {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #ccc;
+        margin-bottom: 6px;
+      }
+
+      .step-name {
+        font-family: Quickstand, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .step-time {
+        font-family: Quickstand, sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+
+    .stepper-item.active {
+      font-weight: bold;
+    }
+
+    .stepper-item.completed .step-counter {
+      background-color: #4bb543;
+    }
+
+    .stepper-item.completed::after {
+      position: absolute;
+      content: "";
+      border-bottom: 5px solid #4bb543;
+      width: 100%;
+      top: 50px;
+      left: 50%;
+      z-index: 3;
+    }
+
+    .stepper-item:first-child::before {
+      content: none;
+    }
+
+    .stepper-item:last-child::after {
+      content: none;
+    }
+  }
+
+  p-table {
+    td {
+      font-family: Quickstand, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .tb-product-name {
+      font-family: Quickstand, sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .tb-product-name:hover {
+      text-decoration: underline;
+      color: red;
+    }
+
+    img {
+      cursor: pointer;
+    }
+
+    .p-datatable-wrapper {
+      border-radius: 20px;
+    }
+  }
+
+  .order-info {
+    margin-bottom: 50px;
+
+    .p-timeline-event-opposite {
+      display: contents;
+    }
+
+    .p-timeline-event-separator {
+      span {
+        background-color: #4bb543;
+        height: 36px;
+        width: 36px;
+        border-radius: 20px;
+        justify-content: center;
+        display: flex;
+        margin-right: 0px !important;
+      }
+    }
+
+    .p-timeline-event-content {
+      margin-top: 15px;
+
+      .p-card {
+        border-radius: 20px;
+
+        .p-card-title {
+          font-family: Quickstand, sans-serif;
+          font-weight: 600;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .order-info .info-detail {
+    border-right: 3px solid #ced4da;
+
+    .card .card-body {
+      padding-bottom: 0px !important;
+    }
+  }
+
+  .order-info label {
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .order-info span {
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .label-code {
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+
+    label {
+      font-size: 16px;
+    }
+
+    span {
+      font-size: 18px;
+      color: tomato;
+    }
+  }
+
+  .order-info .price span {
+    color: red;
+  }
+
+  .btn-order-detail {
+    button {
+      border-radius: 20px;
+      margin-right: 15px;
+      height: 36px;
+      font-size: 18px;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      border: 1px solid #ced4da;
+      color: white;
+    }
+
+    .btn-rate {
+      background-color: #4bb543;
+    }
+
+    .btn-cancel {
+      background-color: #f97316;
+    }
+
+    .btn-refund {
+      background-color: #f97316;
+    }
+
+    button:hover {
+      background-color: red;
+    }
+  }
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted h4 {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-content {
+  background-color: transparent;
+  margin-top: 30px;
+  border-color: transparent;
+  padding: 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .card {
+  margin-bottom: 10px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-header {
+  display: block;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-header
+  .ng-star-inserted {
+  padding: 0;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address h5 {
+  padding-right: 10px;
+  border-right: 2px solid #ced4da;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .p-panel-content {
+  background-color: transparent;
+  margin-top: 0px !important;
+  border-color: transparent;
+  margin-left: 20px;
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card {
+  border-radius: 20px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card
+  .p-panel-footer {
+  border-radius: 0px 0px 20px 20px;
+
+  button {
+    height: 36px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    color: white;
+    transition: filter 0.3s;
+  }
+
+  .btn-default {
+    background-color: green;
+  }
+
+  .btn-edit {
+    background-color: deepskyblue;
+  }
+
+  .btn-remove {
+    background-color: crimson;
+  }
+
+  button:hover {
+    filter: brightness(175%);
+  }
+}

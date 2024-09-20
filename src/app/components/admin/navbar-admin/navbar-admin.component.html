@@ -1,0 +1,48 @@
+<nav class="topnav navbar navbar-light">
+    <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <form class="form-inline mr-auto searchform text-muted">
+        <div class="search-container">
+            <span class="search-icon"><i class="fa fa-search fa-custom-size"></i></span>
+            <input type="search" placeholder="Tìm kiếm"
+                class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted">
+        </div>
+    </form>
+
+    <ul class="nav" style="transform: translateX(810%);">
+        <li class="nav-item">
+            <a class="nav-link text-muted my-2" href="#" data-toggle="modal" data-target=".modal-shortcut">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item nav-notif">
+            <a class="nav-link text-muted my-2" href="#" data-toggle="modal" data-target=".modal-notif">
+                <i class="fa fa-bell" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="nav-item dropdown user-dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                (click)="profile.toggle($event)">
+                <i class="fa fa-user icon-custom-size"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<p-overlayPanel #profile>
+    <div class="flex flex-column gap-3 w-25rem">
+        <div>
+            <ul class="list-none p-0 m-0 flex flex-column gap-3">
+                <!-- <li><a class="dropdown-item" href="/profile/general"><i class="fa fa-info" aria-hidden="true"></i>
+                        Thông tin cá nhân</a>
+                </li> -->
+                <div class="" style="color: red; font-size: 30px; font-weight: bold;margin: auto;">
+                    {{ user.data.username }} - {{ user.data.role }}
+                </div>
+                <li><a class="dropdown-item" (mousedown)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Đăng
+                        xuất</a></li>
+            </ul>
+        </div>
+    </div>
+</p-overlayPanel>

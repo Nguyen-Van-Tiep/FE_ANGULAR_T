@@ -1,0 +1,107 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid row">
+        <div class="col-md-2 offset-1 logo">
+            <img src="../../../../assets/img/logo/logo.jpg" alt="" (mousedown)="goHome()">
+        </div>
+        <div class="col-md-6 menu">
+            <div class="container">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Sản phẩm</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 catalog">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cart-icon ">
+                                <a class="nav-link" (click)="opCart.toggle($event)"> <i
+                                        class="fa fa-shopping-cart icon-custom-size" pBadge [value]="totalUniqueItems"
+                                        severity="danger"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" (click)="profile.toggle($event)"
+                                    aria-expanded="false">
+                                    <i class="fa fa-user icon-custom-size"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+<p-overlayPanel #profile>
+    <ul class="list-none p-0 m-0 flex flex-column gap-3" [ngSwitch]="isLogin">
+        <ng-template [ngSwitchCase]="true">
+            <li><a class="dropdown-item" href="/profile/general"><i class="fa fa-info" aria-hidden="true"></i> Thông tin
+                    cá
+                    nhân</a></li>
+            <li><a class="dropdown-item" href="/profile/order-processing"><i class="fa fa-truck" aria-hidden="true"></i>
+                    Đơn
+                    hàng</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (mousedown)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng
+                    xuất</a></li>
+        </ng-template>
+        <ng-template [ngSwitchCase]="false">
+            <li><a class="dropdown-item" (mousedown)="goToSignInPage()"> <i class="fa fa-sign-in"
+                        aria-hidden="true"></i> Đăng
+                    nhập</a> </li>
+        </ng-template>
+    </ul>
+
+</p-overlayPanel>
+
+<!-- <p-overlayPanel #opCart [ngSwitch]="isLogin" [style]="{'margin-left': '40px'}" class="overlay-cart"> -->
+<p-overlayPanel #opCart [ngSwitch]="isLogin" class="overlay-cart">
+    <div class="flex flex-column gap-3 w-25rem" *ngSwitchCase="true">
+        <div>
+            <span class="font-medium text-900 block mb-2">Sản Phẩm Mới Thêm</span>
+            <ul class="list-none cartProducts">
+                <li *ngFor="let product of response.carts" class="flex align-items-center gap-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img [src]="product.image" style="width: 80px; height: 60px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <span class="font-medium product-name">{{ product.productName }}</span>
+                            <div class="text-sm text-color-secondary">{{ product.brand }}</div>
+                        </div>
+                        <div class="col-md-3 price flex align-items-center gap-2 text-color-secondary ml-auto text-sm">
+                            <span>{{ product.price.toString() | currency:'VND':'symbol':'1.0-0' }}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+        </div>
+        <div class="row infoCart">
+            <div class="col-md-6">
+                <span>{{response.total}} sản phẩm trong giỏ</span>
+            </div>
+            <div class="col-md-6">
+                <button (mousedown)="openCart()" (click)="opCart.toggle($event)">xem giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-column gap-3 w-25rem" *ngSwitchCase="false">
+        <div class="no-login">
+            <span>vui lòng đăng nhập</span>
+            <br>
+            <button (mousedown)="goToSignInPage()">Đăng Nhập</button>
+        </div>
+    </div>
+</p-overlayPanel>

@@ -1,0 +1,7 @@
+body {
+  overflow-x: clip;
+}
+
+::ng-deep body app-admin {
+  background-color: #cfcfcf !important;
+}

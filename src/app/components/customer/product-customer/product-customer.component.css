@@ -1,0 +1,306 @@
+/* Tổng quan body và các phần tử bên trong */
+.body-product {
+  background-color: #e8e8e8;
+  padding: 100px 0px;
+  font-family: Quickstand, sans-serif;
+
+  .products {
+    padding: 0 !important;
+
+    .header-filter {
+      margin-bottom: 20px;
+      position: relative;
+
+      p-inputgroup .p-inputgroup {
+        height: 36px;
+
+        p-inputgroupaddon {
+          background-color: white;
+          border-right-color: transparent;
+          border-radius: 20px 0px 0px 20px;
+        }
+
+        input {
+          width: 1200px;
+          border-radius: 0px 20px 20px 0px;
+          border-left-color: transparent;
+        }
+      }
+
+      .btn-filter {
+        position: absolute;
+        left: auto;
+        right: 30px;
+
+        p-dropdown .p-dropdown {
+          height: 36px;
+          border-radius: 20px;
+          width: 220px;
+
+          ul {
+            padding: 0 !important;
+          }
+        }
+
+        .filter-item {
+          display: flex;
+          align-items: center;
+        }
+
+        .filter-item div {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .card {
+      flex: 0 0 auto;
+      margin: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 20px;
+      width: 30%;
+    }
+
+    .card p {
+      box-sizing: border-box;
+      word-wrap: break-word;
+    }
+
+    .card .card-body {
+      word-wrap: break-word;
+      box-sizing: border-box;
+      white-space: normal;
+    }
+
+    .card img {
+      height: 292px;
+    }
+
+    .card:hover {
+      background-color: antiquewhite;
+      box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.5);
+    }
+
+    .card .card-body p span {
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .card .card-body h6 {
+      color: red;
+    }
+
+    .card .card-body h5 {
+      cursor: pointer;
+    }
+
+    .card .card-body h5:hover {
+      color: red;
+    }
+
+    .card .card-body .btn-action .btn-favorite:hover {
+      margin-right: 90px;
+      background-color: red;
+      color: white;
+    }
+
+    .card .card-body .btn-action .btn-view:hover {
+      background-color: red;
+      color: white;
+    }
+
+    .card .card-body .btn-action .btn-cart:hover {
+      background-color: red;
+      margin-right: 60px;
+      color: white;
+    }
+
+    .card .card-body .btn-action button {
+      margin-right: 10px;
+      height: 36px;
+      width: 36px;
+      border-radius: 20px;
+      background-color: antiquewhite;
+      border-color: transparent;
+      transition: margin-right 0.5s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .card .card-body .btn-action button::before {
+      content: attr(data-name);
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 10px);
+      transform: translateY(-50%);
+      padding: 5px;
+      color: black;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card .card-body .btn-action button:hover::before {
+      opacity: 1;
+    }
+  }
+
+  /* phân trang */
+  nav {
+    ul {
+      transform: translate(-30px, 10px);
+    }
+
+    ul li {
+      margin-right: 5px;
+
+      a {
+        height: 36px;
+        width: 36px;
+        border-radius: 20px;
+        font-family: Quickstand, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+        border-radius: 20px !important;
+      }
+
+      a:hover {
+        color: white;
+        background-color: red;
+      }
+    }
+
+    .page-item.active a {
+      color: white;
+      background-color: red;
+      border: 1px solid #ced4da;
+    }
+  }
+}
+
+/* CSS cho sidebar filter */
+.side-bar-filter p-card ::ng-deep .p-card {
+  border-radius: 20px;
+
+  .row {
+    margin-bottom: 20px;
+
+    .title {
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: black;
+    }
+
+    .field-checkbox {
+      margin-left: 10px;
+
+      .p-checkbox-label {
+        font-family: Quickstand, sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        color: black;
+      }
+    }
+  }
+
+  .f-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các phần tử theo chiều ngang */
+
+    input {
+      width: 120px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #ced4da !important;
+    }
+
+    input:focus-visible {
+      border: 1px solid #ced4da !important;
+    }
+
+    span {
+      margin: 0px 10px;
+    }
+
+    .btn-primary {
+      margin-top: 10px; /* Khoảng cách trên nút để không bị dính sát vào phần tử trên */
+    }
+  }
+
+  .btn-clear-filter {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    background-color: white;
+    color: red;
+  }
+
+  .btn-clear-filter:hover {
+    background-color: red;
+    color: white;
+  }
+}
+
+/* Xóa các nút spin button trong input number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+body ::ng-deep a {
+  text-decoration: none !important;
+}
+
+body p-breadcrumb ::ng-deep .p-breadcrumb {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+
+  ol {
+    margin: 0.5rem 0;
+    padding-left: 15rem;
+  }
+
+  a {
+    color: black !important;
+  }
+
+  a:hover {
+    color: red !important;
+  }
+
+  a span {
+    color: black !important;
+  }
+
+  a span:hover {
+    color: red !important;
+  }
+}
+
+body p-inputNumber ::ng-deep {
+  display: contents !important;
+
+  span {
+    margin: 0px 5px !important;
+  }
+}

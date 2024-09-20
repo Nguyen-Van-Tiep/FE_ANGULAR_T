@@ -1,0 +1,99 @@
+<body class="container-xxl">
+  <div class="wrapper">
+    <app-side-bar-profile class="side-bar"></app-side-bar-profile>
+    <section>
+      <p-panel [toggleable]="false">
+        <ng-template pTemplate="header">
+          <div>
+            <h4>Hồ sơ của tôi</h4>
+            <span>quản lý thông tin cá nhân</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="body">
+          <form action="">
+            <div class="row i-info">
+              <div class="flex-auto col-md-6">
+                <label for="integeronly">Tài khoản</label>
+                <p-inputGroup>
+                  <input type="text" [disabled]="true" [(ngModel)]="response.username" pInputText
+                    [pKeyFilter]="blockSpace" name="username" />
+                </p-inputGroup>
+              </div>
+              <div class="flex-auto col-md-6">
+                <label for="integeronly">Họ và tên</label>
+                <p-inputGroup>
+                  <input type="text" [disabled]="!isDisable" pInputText [(ngModel)]="response.fullName"
+                    (change)="validate(response.fullName)" name="fullName" />
+                </p-inputGroup>
+              </div>
+            </div>
+            <div class="row i-info">
+              <div class="col-md-6">
+                <label for="integeronly">Giới Tính</label>
+                <p-inputGroup>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <p-radioButton [disabled]="!isDisable+''" name="gender" value="Male" [(ngModel)]="response.gender"
+                        inputId="ingredient1" />
+                      <label for="ingredient1" class="ml-2">
+                        Nam
+                      </label>
+                    </div>
+
+                    <div class="col-md-3">
+                      <p-radioButton [disabled]="!isDisable+''" name="gender" value="Female"
+                        [(ngModel)]="response.gender" inputId="ingredient2" />
+                      <label for="ingredient2" class="ml-2">
+                        Nữ
+                      </label>
+                    </div>
+
+                    <div class="col-md-3">
+                      <p-radioButton [disabled]="!isDisable+''" name="gender" value="other"
+                        [(ngModel)]="response.gender" inputId="ingredient3" />
+                      <label for="ingredient3" class="ml-2">
+                        khác
+                      </label>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+                </p-inputGroup>
+              </div>
+              <div class="col-md-6">
+                <label for="integeronly">Ngày sinh</label>
+                <p-inputGroup>
+                  <p-calendar [disabled]="!isDisable+''" (change)="validate(response.birthOfDate)" [maxDate]="maxDate"
+                    [(ngModel)]="response.birthOfDate" name="birthOfDate" dateFormat="dd/mm/yy" />
+                </p-inputGroup>
+              </div>
+            </div>
+            <div class="row i-info">
+              <div class="col-md-6">
+                <label for="integeronly">Số điện thoại</label>
+                <p-inputGroup>
+                  <input type="text" [disabled]="!isDisable" (change)="validate(response.numberPhone)" pInputText
+                    [(ngModel)]="response.numberPhone" name="numberPhone" [pKeyFilter]="blockSpace" />
+                </p-inputGroup>
+              </div>
+              <div class="col-md-6">
+                <label for="integeronly">Email</label>
+                <p-inputGroup>
+                  <input type="text" [disabled]="!isDisable" pInputText (change)="validate(response.email)"
+                    [(ngModel)]="response.email" name="email" [pKeyFilter]="blockSpace" />
+                </p-inputGroup>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button class="btn-edit" *ngIf="!isDisable" (mousedown)="edit()">Chỉnh Sửa</button>
+          <div class="row justify-content-end" *ngIf="isDisable">
+            <button class="col-md-2" (mousedown)="edit()">Hủy</button>
+            <button class="col-md-2" (mousedown)="btnConfirm()" [disabled]="!isValid">Xác Nhận</button>
+          </div>
+        </ng-template>
+        <p-toast />
+      </p-panel>
+    </section>
+  </div>
+</body>

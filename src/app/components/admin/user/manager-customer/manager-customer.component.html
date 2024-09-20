@@ -1,0 +1,460 @@
+<body>
+    <div class="container-fluid">
+        <p-table #dt1 [value]="users" dataKey="id" [rowHover]="true" [loading]="loading"
+            [globalFilterFields]="['fullName', 'gender', 'birthOfDate', 'numberPhone', 'email', 'status']"
+            (onSort)="onSort($event)">
+            <ng-template pTemplate="caption">
+                <div class="row justify-content-between">
+                    <div class="col-4">
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="fa fa-search"></i>
+                            <input pInputText type="text"
+                                placeholder="Search theo tên, số điện thoại, email, ngày sinh, giới tính"
+                                (input)="applyFilter()" (change)="getCustomer()" id="search-input" br name="searchValue"
+                                [(ngModel)]="searchValue" />
+                        </span>
+                    </div>
+                    <!-- <div class="col-4">
+                        <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus" (onChange)="applyFilter()"
+                            placeholder="Chọn trạng thái"></p-dropdown>
+                        <p-calendar [(ngModel)]="fromDate" (onSelect)="applyFilter()"
+                            placeholder="Từ ngày"></p-calendar>
+                        <p-calendar [(ngModel)]="toDate" (onSelect)="applyFilter()" placeholder="Đến ngày"></p-calendar>
+                    </div> -->
+                    <div class="col-4">
+                        <p-button label="Thêm khách hàng" [outlined]="true" (click)="showAddCustomerDialog()" />
+                    </div>
+                    <!-- <div class="col-4 text-end">
+                        <p-button label="xóa bộ lọc" [outlined]="true" />
+                    </div> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr style="text-align: center;">
+                    <th style="width:5rem">
+                        STT
+                    </th>
+                    <th style="min-width:20rem" pSortableColumn="fullName">
+                        <div class="flex align-items-center">
+                            Họ và Tên
+                            <p-sortIcon field="fullName" />
+                        </div>
+                    </th>
+                    <th style="min-width:8rem" pSortableColumn="numberPhone">
+                        <div class="flex align-items-center">
+                            Số điện thoại
+                            <p-sortIcon field="numberPhone" />
+                        </div>
+                    </th>
+                    <th style="min-width:6rem">
+                        <div class="flex align-items-center" pSortableColumn="email">
+                            Email
+                            <p-sortIcon field="email" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="birthOfDate">
+                        <div class="flex align-items-center">
+                            Ngày sinh
+                            <p-sortIcon field="birthOfDate" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="gender">
+                        <div class="flex align-items-center">
+                            Giới Tính
+                            <p-sortIcon field="gender" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="status">
+                        <div class="flex align-items-center">
+                            trạng thái
+                            <p-sortIcon field="status" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Action
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+                <tr style="text-align: center;">
+                    <td>
+                        {{first+ rowIndex +1}}
+                    </td>
+                    <td class="col-brand-name">
+                        {{ user.fullName }}
+                    </td>
+                    <td>
+                        {{ user.numberPhone }}
+                    </td>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    <td>
+                        {{ user.birthOfDate}}
+                    </td>
+                    <td>
+                        {{ user.gender }}
+                    </td>
+                    <td>
+                        <p-inputSwitch trueValue="Hoạt động" [(ngModel)]="user.status"
+                            (onChange)="onStatusChange(user)"></p-inputSwitch>
+                    </td>
+                    <td>
+                        <p-button [pTooltip]="tooltipBtnLock" severity="help" tooltipPosition="bottom" class="btn-lock"
+                            icon="fa-solid fa-pen-to-square" *ngIf="!isDisable" (click)="editUser(user.id)">
+                            <ng-template #tooltipBtnLock>
+                                <div class="flex align-items-center">
+                                    <span> Chỉnh sửa</span>
+                                </div>
+                            </ng-template>
+                        </p-button>
+                        <p-button [pTooltip]="tooltipBtnRemove" severity="danger" tooltipPosition="bottom"
+                            class="btn-remove" icon="fa-solid fa-map-location-dot" (click)="addressInfo(user.id)">
+                            <ng-template #tooltipBtnRemove>
+                                <div class="flex align-items-center">
+                                    <span> Thêm địa chỉ</span>
+                                </div>
+                            </ng-template>
+                        </p-button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="7">
+                        <p-paginator (onPageChange)="paginate($event)" [first]="0" [rows]="pagination.pageSize"
+                            [totalRecords]="pagination.pageTotal" [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[10,25,50]" currentPageReportTemplate="Hiển thị {{pagination.pageNumber * pagination.pageSize + 1}}
+                                              đến {{(pagination.pageNumber + 1) * pagination.pageSize > pagination.pageTotal ?
+                                                    pagination.pageTotal : (pagination.pageNumber + 1) * pagination.pageSize}}
+                                              trên {{pagination.pageTotal}} khách hàng" />
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No customers found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</body>
+<p-dialog header="Thêm khách hàng" [(visible)]="displayAddCustomerDialog" [modal]="true" [closable]="true"
+    [style]="{width: '50vw',height:'20vw'}">
+    <form action="">
+        <div class="row i-info">
+            <div class="flex-auto col-md-6">
+                <label for="integeronly">Tài khoản</label>
+                <p-inputGroup>
+                    <input type="text" [(ngModel)]="createRequest.username" pInputText name="username"
+                        [required]="true" />
+                </p-inputGroup>
+                <div *ngIf="usernameError" class="error-message">{{ usernameError }}</div>
+            </div>
+            <div class="flex-auto col-md-6">
+                <label for="integeronly">Họ và tên</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="createRequest.fullName" name="fullName"
+                        [required]="true" />
+                </p-inputGroup>
+                <div *ngIf="fullnameError" class="error-message">{{ fullnameError }}</div>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="integeronly">Giới Tính</label>
+                <p-inputGroup>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Male" [(ngModel)]="createRequest.gender"
+                                inputId="ingredient1" />
+                            <label for="ingredient1" class="ml-2">
+                                Nam
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Female" [(ngModel)]="createRequest.gender"
+                                inputId="ingredient2" />
+                            <label for="ingredient2" class="ml-2">
+                                Nữ
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="other" [(ngModel)]="createRequest.gender"
+                                inputId="ingredient3" />
+                            <label for="ingredient3" class="ml-2">
+                                khác
+                            </label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </p-inputGroup>
+            </div>
+            <div class="col-md-6">
+                <label for="integeronly">Ngày sinh</label>
+                <p-inputGroup>
+                    <p-calendar [(ngModel)]="createRequest.birthOfDate" name="birthOfDate" dateFormat="dd/mm/yy" />
+                </p-inputGroup>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="integeronly">Số điện thoại</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="createRequest.numberPhone" name="numberPhone"
+                        [required]="true" />
+                </p-inputGroup>
+                <div *ngIf="phoneError" class="error-message">{{ phoneError }}</div>
+            </div>
+            <div class="col-md-6">
+                <label for="integeronly">Email</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="createRequest.email" name="email" [required]="true" />
+                </p-inputGroup>
+                <div *ngIf="emailError" class="error-message">{{ emailError }}</div>
+            </div>
+        </div>
+        <br />
+        <p-footer style="margin-left: 400px;">
+            <p-button label="Lưu" icon="pi pi-check" type="submit" [disabled]="!isFormValid()"
+                (click)="addUserCustomer()"></p-button>
+            <p-button label="Hủy" icon="pi pi-times" (click)="displayAddCustomerDialog=false"
+                class="ui-button-secondary"></p-button>
+        </p-footer>
+    </form>
+</p-dialog>
+
+<p-dialog header="Chỉnh sửa thông tin" [(visible)]="showEditDialog" [modal]="true" [closable]="true"
+    [style]="{width: '50vw', height: '20vw'}">
+    <form #editForm="ngForm" (ngSubmit)="saveChanges(userResponse.id)" novalidate>
+        <div class="row i-info">
+            <div class="flex-auto col-md-6">
+                <label for="username">Tài khoản</label>
+                <p-inputGroup>
+                    <input type="text" [(ngModel)]="userResponse.username" pInputText name="username"
+                        [disabled]="true" />
+                </p-inputGroup>
+            </div>
+            <div class="flex-auto col-md-6">
+                <label for="fullName">Họ và tên</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="userResponse.fullName" name="fullName"
+                        #fullName="ngModel" required />
+                </p-inputGroup>
+                <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="error-message">
+                    Họ và tên không được để trống
+                </div>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="gender">Giới Tính</label>
+                <p-inputGroup>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Male" [(ngModel)]="userResponse.gender"
+                                inputId="ingredient1" required />
+                            <label for="ingredient1" class="ml-2">Nam</label>
+                        </div>
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Female" [(ngModel)]="userResponse.gender"
+                                inputId="ingredient2" />
+                            <label for="ingredient2" class="ml-2">Nữ</label>
+                        </div>
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="other" [(ngModel)]="userResponse.gender"
+                                inputId="ingredient3" />
+                            <label for="ingredient3" class="ml-2">Khác</label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </p-inputGroup>
+            </div>
+            <div class="col-md-6">
+                <label for="birthOfDate">Ngày sinh</label>
+                <p-inputGroup>
+                    <p-calendar [(ngModel)]="userResponse.birthOfDate" name="birthOfDate" dateFormat="dd/mm/yy"
+                        required></p-calendar>
+                </p-inputGroup>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="numberPhone">Số điện thoại</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="userResponse.numberPhone" name="numberPhone"
+                        #numberPhone="ngModel" required />
+                </p-inputGroup>
+                <div *ngIf="numberPhone.invalid && (numberPhone.dirty || numberPhone.touched)" class="error-message">
+                    Số điện thoại không hợp lệ
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="email">Email</label>
+                <p-inputGroup>
+                    <input type="email" pInputText [(ngModel)]="userResponse.email" name="email" #email="ngModel"
+                        required />
+                </p-inputGroup>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                    Email không hợp lệ
+                </div>
+            </div>
+        </div>
+        <br />
+        <p-footer style="margin-left: 400px;">
+            <p-button label="Lưu" icon="pi pi-check" type="submit" [disabled]="!editForm.valid"></p-button>
+            <p-button label="Hủy" icon="pi pi-times" (click)="edit()" class="ui-button-secondary"></p-button>
+        </p-footer>
+    </form>
+</p-dialog>
+
+<p-dialog header="Thêm địa chỉ khách hàng" [(visible)]="showAddressDialog" [modal]="true" [closable]="true"
+    [style]="{width: '50vw',height:'35vw'}">
+    <p-panel [toggleable]="false">
+        <ng-template pTemplate="header">
+            <div>
+                <h4>Địa chỉ</h4>
+                <span>quản lý Địa chỉ nhận hàng</span>
+            </div>
+            <button (click)="showDialog(addressRequest.id)">Thêm địa chỉ</button>
+        </ng-template>
+        <ng-template pTemplate="body">
+            <div *ngFor="let address of addressResponse.addresses">
+                <div class="card">
+                    <p-panel [toggleable]="false">
+                        <ng-template pTemplate="header">
+                            <div class="s-address">
+                                <h5>{{address.fullName}}</h5>
+                                <span>{{address.numberPhone}}</span>
+                                <p-tag *ngIf="address.isDefault" severity="success" value="Mặc Định" [rounded]="true" />
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="body">
+                            {{address.address}}
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <div class="row justify-content-end">
+                                <button class="col-md-3 btn-default" *ngIf="!address.isDefault"
+                                    (mousedown)="setAsDefault(address)">Đặt
+                                    Làm mặc định</button>
+                                <button class="col-md-2 btn-edit" (mousedown)="btnUpdate(address.id)">chỉnh sửa</button>
+                                <button class="col-md-1 btn-remove"
+                                    (mousedown)="confirmRemoveAddress($event,address.id)">xóa</button>
+                            </div>
+                        </ng-template>
+                    </p-panel>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item" [class.disabled]="addressResponse.pagination.pageNumber === 0">
+                        <a class="page-link" (click)="previousPage()">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li *ngFor="let p of addressResponse.pagination.pages" class="page-item"
+                        [class.active]="p === addressResponse.pagination.pageNumber+1">
+                        <a class="page-link" (click)="goToPage(p)">{{ p }}</a>
+                    </li>
+                    <li class="page-item"
+                        [class.disabled]="addressResponse.pagination.pageNumber+1 === addressResponse.pagination.pages.length">
+                        <a class="page-link" (click)="nextPage()">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </ng-template>
+        <p-toast />
+    </p-panel>
+</p-dialog>
+
+<p-dialog header="Địa Chỉ Mới" [modal]="true" [(visible)]="isVisible" [style]="{ width: '50vw',height:'40vw'}"
+    (onHide)="reset()">
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <p-floatLabel>
+                <input pInputText id="fullName" name="fullName" [(ngModel)]="addressRequest.fullName"
+                    [required]="true" />
+                <label for="fullName">Họ và Tên</label>
+            </p-floatLabel>
+        </div>
+        <div class="col-md-6">
+            <p-floatLabel>
+                <input pInputText id="numberPhone" name="numberPhone" [(ngModel)]="addressRequest.numberPhone"
+                    [required]="true" />
+                <label for="numberPhone">Số điện thoại</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Thành phố -->
+            <div class="form-group">
+                <label for="citySelect">Tỉnh/Thành phố</label>
+                <select id="citySelect" (change)="onCityChange($event)" [(ngModel)]="selectedProvinceID">
+                    <option *ngFor="let city of cities" [value]="city.ProvinceID">{{ city.ProvinceName }}</option>
+                    <option *ngIf="cities.length === 0">No cities available</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Quận/Huyện -->
+            <div class="form-group">
+                <label for="districtSelect">Quận/Huyện</label>
+                <select id="districtSelect" (change)="onDistrictChange($event)" *ngIf="districts.length > 0"
+                    [(ngModel)]="selectedDistrictID">
+                    <option *ngFor="let district of districts" [value]="district.DistrictID">{{ district.DistrictName }}
+                    </option>
+                    <option *ngIf="districts.length === 0">No districts available</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Xã/Phường -->
+            <div class="form-group">
+                <label for="wardSelect">Xã/Phường</label>
+                <select id="wardSelect" (change)="onWardChange($event)" *ngIf="wards.length > 0"
+                    [(ngModel)]="selectedWardCode">
+                    <option *ngFor="let ward of wards" [value]="ward.WardCode">{{ ward.WardName }}</option>
+                    <option *ngIf="wards.length === 0">No wards available</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <p-floatLabel>
+            <textarea pInputText id="address" rows="5" cols="30" name="address" [(ngModel)]="addressRequest.address"
+                pInputTextarea [required]="true"></textarea>
+            <label for="address">Địa chỉ cụ thể</label>
+        </p-floatLabel>
+    </div>
+    <br />
+    <div class="row">
+        <label class="l-type-address">Loại Địa Chỉ</label>
+        <p-selectButton [options]="addressType" [(ngModel)]="typeSelected" [multiple]="false" optionLabel="name"
+            optionValue="value" />
+    </div>
+    <br />
+    <div class="row">
+        <p-inputSwitch [(ngModel)]="addressRequest.isDefault" [disabled]="disableDefault"
+            pTooltip="Bạn không thể xoá nhãn Địa chỉ mặc định. Hãy đặt địa chỉ khác làm Địa chỉ mặc định của bạn nhé."
+            tooltipPosition="top" [tooltipDisabled]="!disableDefault" />
+        <span class="s-default">đặt làm địa chỉ mặc định</span>
+    </div>
+    <br />
+    <div class="row justify-content-end footer-dialog">
+        <button class="col-md-2 btn-cancel" (click)="isVisible = false">Quay Lại</button>
+        <button class="col-md-2 btn-done" (click)="saveAddress()">Hoàn Thành</button>
+    </div>
+</p-dialog>
+<p-confirmDialog></p-confirmDialog>

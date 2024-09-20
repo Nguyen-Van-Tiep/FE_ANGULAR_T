@@ -1,0 +1,15 @@
+* {
+  background-color: #e8e8e8;
+  width: 100%;
+  padding: 0;
+  height: 100%;
+  display: flex;
+}
+
+::ng-deep app-general-customer,
+::ng-deep app-detail-order,
+::ng-deep app-address-customer,
+::ng-deep app-order-customer {
+  display: flex;
+  background-color: #e8e8e8;
+}

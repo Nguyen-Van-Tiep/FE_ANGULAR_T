@@ -1,0 +1,31 @@
+body{
+    background-color: antiquewhite;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: -1;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 100%; /* Chiều cao 100% của body */
+}
+
+@media only screen and (max-width: 600px) {
+    /* Đặt kiểu cho màn hình có kích thước tối đa 600px */
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Đặt kiểu cho màn hình có kích thước từ 601px đến 1024px */
+}
+
+@media only screen and (min-width: 1025px) {
+    /* Đặt kiểu cho màn hình có kích thước tối thiểu 1025px */
+}
+

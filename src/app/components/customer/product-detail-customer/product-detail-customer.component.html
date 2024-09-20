@@ -1,0 +1,44 @@
+<body>
+    <div class="product-details">
+        <div class="product-images">
+            <img [src]="mainImage" alt="Product Image" class="main-image" />
+            <div class="thumbnail-images">
+                <img *ngFor="let image of images" [src]="image.url" alt="Thumbnail" (click)="changeImage(image)"
+                    class="thumbnail" />
+            </div>
+        </div>
+    
+        <div class="product-info">
+            <h1>{{ response.productName }}</h1>
+            <p class="price">{{ formatCurrency(selectedPD.price) }}</p>
+            <p class="description">{{ response.description }}</p>
+    
+            <div class="product-options">
+                <div class="color-options">
+                    <h3>Select Color</h3>
+                    <div *ngFor="let color of colors" class="color-radio">
+                        <input type="radio" id="{{ color.name }}" name="color" [(ngModel)]="selectedColor" [value]="color"
+                            (click)="changeColor(color)" />
+                        <label [for]="color.name" [style.background-color]="color.code" class="color-label"
+                            [class.selected-color]="selectedColor === color">
+                        </label>
+                    </div>
+                </div>
+                <p class="quantity">Số lượng còn lại: {{ selectedPD.quantity }}</p>
+                <div class="size-options">
+                    <h3>Select Size</h3>
+                    <div class="size-buttons">
+                        <button *ngFor="let size of sizes" type="radio" class="size-button" [value]="size"
+                            (click)="changeSize(size)" [class.selected-size]="selectedSize === size">
+                            {{ size.name }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="add-to-cart" (click)="addToCart()">
+                Thêm vào giỏ hàng
+            </button>
+            <!-- <button (click)="goToPay()">Mua ngay</button> -->
+        </div>
+    </div>
+</body>

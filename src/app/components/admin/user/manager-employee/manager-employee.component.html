@@ -1,0 +1,308 @@
+<body>
+    <div class="container-fluid">
+        <p-table #dt1 [value]="users" dataKey="id" [rowHover]="true" [loading]="loading"
+            [globalFilterFields]="['fullName', 'gender', 'birthOfDate', 'numberPhone', 'email', 'status']"
+            [filterDelay]="0" (onSort)="onSort($event)">
+            <ng-template pTemplate="caption">
+                <div class="row justify-content-between">
+                    <div class="col-4">
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="fa fa-search"></i>
+                            <input pInputText type="text" placeholder="Tên khách hàng"
+                                (input)="applyFilterGlobal($event)" (change)="getEmployee()" id="search-input"
+                                name="searchValue" [(ngModel)]="searchValue" />
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <p-button label="Thêm mới" [outlined]="true" (onClick)="showDialog()" />
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr style="text-align: center;">
+                    <th style="min-width:20rem" pSortableColumn="fullName">
+                        <div class="flex align-items-center">
+                            Họ và Tên
+                            <p-sortIcon field="fullName" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="gender">
+                        <div class="flex align-items-center">
+                            Giới Tính
+                            <p-sortIcon field="gender" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="birthOfDate">
+                        <div class="flex align-items-center">
+                            Ngày sinh
+                            <p-sortIcon field="birthOfDate" />
+                        </div>
+                    </th>
+                    <th style="min-width:8rem" pSortableColumn="numberPhone">
+                        <div class="flex align-items-center">
+                            Số điện thoại
+                            <p-sortIcon field="numberPhone" />
+                        </div>
+                    </th>
+                    <th style="min-width:6rem">
+                        <div class="flex align-items-center" pSortableColumn="email">
+                            Email
+                            <p-sortIcon field="email" />
+                        </div>
+                    </th>
+                    <th style="min-width:10rem" pSortableColumn="status">
+                        <div class="flex align-items-center">
+                            trạng thái
+                            <p-sortIcon field="status" />
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Thao tác
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr style="text-align: center;">
+                    <td class="col-brand-name">
+                        {{ user.fullName }}
+                    </td>
+                    <td>
+                        {{ user.gender }}
+                    </td>
+                    <td>
+                        {{ user.birthOfDate}}
+                    </td>
+                    <td>
+                        {{ user.numberPhone }}
+                    </td>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    <!-- <td>
+                        {{user.status}}
+                    </td> -->
+                    <td>
+                        <p-inputSwitch trueValue="Hoạt động" [(ngModel)]="user.status"
+                            (onChange)="onStatusChange(user)"></p-inputSwitch>
+                    </td>
+                    <td>
+                        <p-button [pTooltip]="tooltipBtnLock" severity="help" tooltipPosition="bottom" class="btn-lock"
+                            icon="fa-solid fa-pen-to-square" *ngIf="!isDisable" (click)="editUser(user.id)">
+                            <ng-template #tooltipBtnLock>
+                                <div class="flex align-items-center">
+                                    <span> Chỉnh sửa</span>
+                                </div>
+                            </ng-template>
+                        </p-button>
+                    </td>
+
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="7">
+                        <p-paginator (onPageChange)="paginate($event)" [first]="0" [rows]="pagination.pageSize"
+                            [totalRecords]="pagination.pageTotal" [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[10,25,50]"
+                            currentPageReportTemplate="Hiển thị {{pagination.pageFirst}} đến {{pagination.pageLast}} trên {{pagination.pageTotal}} nhân viên"
+                            [totalRecords]="pagination.pageTotal" />
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No customers found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</body>
+
+
+<p-dialog header="{{actionInfo}}" [modal]="true" [(visible)]="isVisible" [style]="{ width: '60rem' }">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card brand-stylist">
+                <h4>Thông tin Đăng nhập</h4>
+                <div class="row styles">
+                    <p-floatLabel class="col-md-12">
+                        <input pInputText id="username" name="username" [(ngModel)]="employeeRequest.username" />
+                        <label for="username">Tên Đăng Nhập</label>
+                    </p-floatLabel>
+                    <div *ngIf="usernameError" class="error-message">{{ usernameError }}</div>
+                    <p-floatLabel class="col-md-12">
+                        <p-password id="password" [feedback]="false" name="password"
+                            [(ngModel)]="employeeRequest.password" />
+                        <label for="password">Mật khẩu</label>
+                    </p-floatLabel>
+                    <div *ngIf="passwordError" class="error-message">{{ passwordError }}</div>
+
+
+                    <p-floatLabel class="col-md-12">
+                        <p-password id="confirmPassword" [feedback]="false" name="confirmPassword"
+                            [(ngModel)]="employeeRequest.confirmPassword" />
+                        <label for="confirmPassword">Xác nhận Mật khẩu</label>
+                    </p-floatLabel>
+                    <div *ngIf="confirmPasswordError" class="error-message">{{ confirmPasswordError }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <h4>Thông tin chung</h4>
+                <form action="">
+                    <div class="row i-info">
+                        <p-floatLabel class="col-md-12">
+                            <input pInputText id="fullName" name="fullName" [(ngModel)]="employeeRequest.fullName" />
+                            <label for="fullName">Họ và Tên</label>
+                        </p-floatLabel>
+                        <div *ngIf="fullnameError" class="error-message">{{ fullnameError }}</div>
+                    </div>
+                    <div class="row gender-info">
+                        <div class="col-md-6">
+                            <label for="integeronly">Giới Tính</label>
+                            <p-inputGroup>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p-radioButton name="gender" value="Male" [(ngModel)]="employeeRequest.gender"
+                                            inputId="ingredient1" />
+                                        <label for="ingredient1" class="ml-2">
+                                            Nam
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <p-radioButton name="gender" value="Female" [(ngModel)]="employeeRequest.gender"
+                                            inputId="ingredient2" />
+                                        <label for="ingredient2" class="ml-2">
+                                            Nữ
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <p-radioButton name="gender" value="other" [(ngModel)]="employeeRequest.gender"
+                                            inputId="ingredient3" />
+                                        <label for="ingredient3" class="ml-2">
+                                            khác
+                                        </label>
+                                    </div>
+                                </div>
+                            </p-inputGroup>
+                        </div>
+                        <p-floatLabel class="col-md-6">
+                            <p-calendar [(ngModel)]="employeeRequest.birthOfDate" name="birthOfDate"
+                                dateFormat="dd-mm-yy" />
+                            <label for="birthOfDate">Ngày Sinh</label>
+                        </p-floatLabel>
+                    </div>
+                    <div class="row i-info">
+                        <p-floatLabel class="col-md-6">
+                            <input pInputText id="numberPhone" name="numberPhone"
+                                [(ngModel)]="employeeRequest.numberPhone" />
+                            <label for="numberPhone">Số điện thoại</label>
+                            <div *ngIf="phoneError" class="error-message">{{ phoneError }}</div>
+
+                        </p-floatLabel>
+                        <p-floatLabel class="col-md-6">
+                            <input pInputText id="email" name="email" [(ngModel)]="employeeRequest.email" />
+                            <label for="email">Email</label>
+                            <div *ngIf="emailError" class="error-message">{{ emailError }}</div>
+
+                        </p-floatLabel>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="row justify-content-end btn-confirm-rate">
+            <button class="col-md-2 btn-edit" (click)="isVisible=false">Hủy</button>
+            <button class="col-md-2 btn-default" (click)="saveUser()">Xác
+                Nhận</button>
+        </div>
+    </ng-template>
+</p-dialog>
+<p-dialog header="Chỉnh sửa thông tin" [(visible)]="showEditDialog" [modal]="true" [closable]="true"
+    [style]="{width: '50vw', height: '20vw'}">
+    <form #editForm="ngForm" (ngSubmit)="saveChanges(response.id)" novalidate>
+        <div class="row i-info">
+            <div class="flex-auto col-md-6">
+                <label for="username">Tài khoản</label>
+                <p-inputGroup>
+                    <input type="text" [(ngModel)]="response.username" pInputText name="username" [disabled]="true" />
+                </p-inputGroup>
+            </div>
+            <div class="flex-auto col-md-6">
+                <label for="fullName">Họ và tên</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="response.fullName" name="fullName" #fullName="ngModel"
+                        required />
+                </p-inputGroup>
+                <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="error-message">
+                    Họ và tên không được để trống
+                </div>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="gender">Giới Tính</label>
+                <p-inputGroup>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Male" [(ngModel)]="response.gender"
+                                inputId="ingredient1" required />
+                            <label for="ingredient1" class="ml-2">Nam</label>
+                        </div>
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="Female" [(ngModel)]="response.gender"
+                                inputId="ingredient2" />
+                            <label for="ingredient2" class="ml-2">Nữ</label>
+                        </div>
+                        <div class="col-md-3">
+                            <p-radioButton name="gender" value="other" [(ngModel)]="response.gender"
+                                inputId="ingredient3" />
+                            <label for="ingredient3" class="ml-2">Khác</label>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </p-inputGroup>
+            </div>
+            <div class="col-md-6">
+                <label for="birthOfDate">Ngày sinh</label>
+                <p-inputGroup>
+                    <p-calendar [(ngModel)]="response.birthOfDate" name="birthOfDate" dateFormat="dd/mm/yy"
+                        required></p-calendar>
+                </p-inputGroup>
+            </div>
+        </div>
+        <div class="row i-info">
+            <div class="col-md-6">
+                <label for="numberPhone">Số điện thoại</label>
+                <p-inputGroup>
+                    <input type="text" pInputText [(ngModel)]="response.numberPhone" name="numberPhone"
+                        #numberPhone="ngModel" required />
+                </p-inputGroup>
+                <div *ngIf="numberPhone.invalid && (numberPhone.dirty || numberPhone.touched)" class="error-message">
+                    Số điện thoại không hợp lệ
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="email">Email</label>
+                <p-inputGroup>
+                    <input type="email" pInputText [(ngModel)]="response.email" name="email" #email="ngModel"
+                        required />
+                </p-inputGroup>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                    Email không hợp lệ
+                </div>
+            </div>
+        </div>
+        <br />
+        <p-footer style="margin-left: 400px;">
+            <p-button label="Lưu" icon="pi pi-check" type="submit" [disabled]="!editForm.valid"></p-button>
+            <p-button label="Hủy" icon="pi pi-times" (click)="edit()" class="ui-button-secondary"></p-button>
+        </p-footer>
+    </form>
+</p-dialog>
+<p-confirmDialog></p-confirmDialog>

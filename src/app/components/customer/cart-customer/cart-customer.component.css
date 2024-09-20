@@ -1,0 +1,197 @@
+.body-cart {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 100px;
+
+    .container {
+        margin-top: 100px;
+
+        .card {
+            border-radius: 20px;
+
+            p-table {
+                .p-datatable-header {
+                    border-radius: 20px 20px 0px 0px;
+
+                    .btn-clear-filter {
+                        button {
+                            border-radius: 10px;
+                            height: 36px;
+
+                            font-size: 16px;
+                            font-weight: 600;
+                            font-family: Quickstand, sans-serif;
+                        }
+
+                        button:hover {
+                            background-color: red;
+                            border-color: transparent;
+                            color: white;
+                        }
+                    }
+
+                    p-iconfield {
+                        width: auto;
+
+                        p-inputicon {
+                            display: flex;
+                            justify-content: center;
+
+                        }
+
+                        input {
+                            height: 36px;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+
+                tbody {
+                    tr td {
+                        font-size: 16px;
+                        font-weight: 500;
+                        font-family: Quickstand, sans-serif;
+                    }
+
+                    .product_name {
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+
+                    .product_name:hover {
+                        color: red;
+                        text-decoration: underline;
+                    }
+
+                    button {
+                        border-radius: 10px;
+                        background-color: red;
+                        color: white;
+                        height: 36px;
+                        width: 36px;
+                        border: 1px solid #ced4da;
+                    }
+
+                    button:hover {
+                        background-color: crimson;
+                        color: #ced4da;
+                    }
+
+                    .o-quantity {
+                        .quantity-control {
+                            display: flex;
+
+                            input {
+                                width: 100px;
+                                height: 36px;
+                                border-radius: 10px;
+                                border: 1px solid #ced4da;
+                                margin: 0px 5px;
+                                text-align: center;
+                                background-repeat: no-repeat;
+                            }
+
+                            input[type="number"]::-webkit-outer-spin-button,
+                            input[type="number"]::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+
+                            input[type="number"] {
+                                -moz-appearance: textfield;
+                            }
+
+                            input:focus {
+                                background-color: bisque;
+                                outline: none;
+                            }
+
+                            button {
+                                background-color: bisque;
+                                color: red;
+
+                            }
+
+                            button:hover {
+                                background-color: red;
+                                color: white;
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+            p-paginator {
+                .p-paginator {
+                    border-radius: 0px 0px 20px 20px;
+                }
+            }
+        }
+
+        .cart-info {
+
+            text-align: center;
+            font-family: Quickstand, sans-serif;
+            background-color: transparent !important;
+            border-color: transparent !important;
+            display: flex;
+            z-index: 10001;
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            transform: translate(0, 0);
+
+
+            .container {
+                padding: 20px;
+                background-color: white;
+                margin-top: 0 !important;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 20px;
+            }
+
+            font-size: 16px;
+
+            button {
+                height: 36px;
+                border-radius: 20px;
+                border: 1px solid #ced4da;
+                font-weight: 600;
+                transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+            }
+
+            button:hover {
+                background-color: red !important;
+            }
+
+            .remove-active {
+                button {
+                    background-color: #f97316;
+                    color: white;
+                }
+            }
+
+            .payment-info {
+                label {
+                    margin-right: 5px;
+                }
+
+                span {
+                    font-size: 20px;
+                    color: red
+                }
+            }
+        }
+    }
+}
+
+body ::ng-deep p-overlay ul{
+    padding-left: 0px !important;
+    margin-bottom: 0px !important;
+}   

@@ -1,0 +1,474 @@
+.side-bar {
+  grid-column: span 4;
+}
+
+body {
+  background-color: #E8E8E8;
+  display: grid;
+  width: 100%;
+  padding: 12px;
+  margin-top: 100px;
+}
+/* General dialog styling */
+p-dialog {
+  font-family: Arial, sans-serif;
+}
+
+/* Row styling */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.col-md-6 {
+  width: 50%;
+  padding: 0 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Input textarea */
+textarea {
+  resize: vertical;
+}
+
+p-inputSwitch {
+  margin-left: 10px;
+}
+
+.s-default {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+/* Button styling */
+.footer-dialog {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-cancel {
+  background-color: #f0f0f0;
+  color: #333;
+  margin-right: 15px;
+  transition: background-color 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-done {
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-done:hover {
+  background-color: #0056b3;
+}
+
+/* SelectButton styling */
+.l-type-address {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+p-selectButton {
+  margin-left: 10px;
+}
+
+/* Tooltip */
+p-inputSwitch + .ui-tooltip {
+  font-size: 14px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* Chia thành 12 cột bằng nhau */
+  grid-gap: 43px;
+}
+
+section {
+  grid-column: span 8;
+}
+
+section p-panel {
+  margin: 0;
+}
+
+section p-panel ::ng-deep .p-panel {
+  background-color: transparent;
+  border-radius: 20px;
+  border-color: grey;
+
+  .p-panel-footer {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0px;
+
+    ul li {
+      margin-right: 5px;
+
+      a {
+        height: 36px;
+        width: 36px;
+        border-radius: 20px;
+        font-family: Quickstand, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+      }
+
+      a:hover {
+        color: white;
+        background-color: red;
+      }
+    }
+
+    .page-item.active a {
+      color: white;
+      background-color: red;
+    }
+  }
+
+  .p-panel-header {
+    background-color: transparent;
+    border-color: transparent;
+    position: relative;
+
+    button {
+      background-color: white;
+      border: 1px solid #ced4da;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 20px;
+      height: 36px;
+      position: absolute;
+      left: auto;
+      right: 0;
+      align-items: center;
+      display: flex;
+    }
+
+    button:hover {
+      background-color: red;
+      color: white;
+      border-color: transparent;
+    }
+  }
+
+  .p-panel .p-panel-footer {
+    padding: 10px;
+  }
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted {
+  padding: 20px;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted h4 {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-content {
+  background-color: transparent;
+  margin-top: 30px;
+  border-color: transparent;
+  padding: 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .card {
+  margin-bottom: 10px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-header {
+  display: block;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-header
+  .ng-star-inserted {
+  padding: 0;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Tạo khoảng cách giữa các phần tử */
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address h5 {
+  padding-right: 10px;
+  border-right: 2px solid #ced4da;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .p-panel-content {
+  background-color: transparent;
+  margin-top: 0px !important;
+  border-color: transparent;
+  margin-left: 20px;
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card {
+  border-radius: 20px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card
+  .p-panel-footer {
+  border-radius: 0px 0px 20px 20px;
+
+  button {
+    height: 36px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    color: white;
+    transition: filter 0.3s;
+  }
+
+  .btn-default {
+    background-color: green;
+  }
+
+  .btn-edit {
+    background-color: darkgoldenrod;
+  }
+
+  .btn-remove {
+    background-color: crimson;
+  }
+
+  button:hover {
+    filter: brightness(175%);
+  }
+}
+
+p-dialog ::ng-deep .p-dialog {
+  background: #0000000d;
+
+  .p-dialog-content .row {
+    margin-top: 40px;
+
+    p-floatlabel input {
+      width: 100%;
+      border-radius: 20px;
+      height: 40px;
+    }
+  }
+
+  p-dropdown .p-dropdown {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    border-radius: 20px;
+    height: 100% !important;
+  }
+
+  p-selectbutton .p-selectbutton div {
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 20px;
+  }
+
+  p-selectbutton .p-selectbutton .p-highlight {
+    background-color: red;
+    color: white;
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+  }
+
+  .l-type-address {
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  p-inputswitch {
+    width: 0;
+    margin-right: 30px;
+  }
+
+  .s-default {
+    width: 600px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    transform: translateY(10%);
+  }
+
+  .footer-dialog {
+    button {
+      height: 36px;
+      border-radius: 20px;
+      border: 1px solid #ced4da;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      margin-left: 10px;
+
+      color: white;
+    }
+
+    .btn-done {
+      background-color: #43f834;
+    }
+
+    .btn-done:hover {
+      background-color: green;
+    }
+
+    .btn-cancel {
+      background-color: red;
+    }
+
+    .btn-cancel:hover {
+      background-color: crimson;
+    }
+  }
+
+  .p-dialog-header {
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  .p-dialog-content {
+    border-radius: 0px 0px 20px 20px;
+  }
+}
+
+.go-back-payment {
+  border: 1px solid #ced4da !important;
+  padding: 5px !important;
+  border-radius: 20px !important;
+  /* left: auto; */
+  transform: translate(340px, 0px) !important;
+
+  button {
+    display: contents !important;
+    position: absolute !important;
+    font-size: 14px;
+    font-weight: 500 !important;
+    font-family: Quickstand, sans-serif;
+    color: #ced4da;
+
+    span {
+      font-size: 14px;
+      font-weight: 500 !important;
+      font-family: Quickstand, sans-serif;
+    }
+  }
+
+  button:hover {
+    border: none !important;
+
+    span {
+      font-size: 14px;
+      font-weight: 600 !important;
+      color: black !important;
+    }
+  }
+}
+
+.go-back-payment:hover {
+  border: none !important;
+
+  button {
+    span {
+      font-size: 14px;
+      font-weight: 600 !important;
+      color: black !important;
+    }
+  }
+}

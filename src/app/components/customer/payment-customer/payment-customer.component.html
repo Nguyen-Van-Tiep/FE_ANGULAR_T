@@ -1,0 +1,128 @@
+<body class="body-payment">
+    <div class="container">
+        <div class="header-payment">
+            <button (mousedown)="goBack()">Quay lại</button>
+        </div>
+        <div class="row ">
+            <div class="col-md-8">
+                <div class="card tb-product">
+                    <p-table #dt [value]="cartItems" dataKey="id" [loading]="loading">
+                        <ng-template pTemplate="header">
+                            <tr style="text-align: center;">
+                                <th style="min-width: 6rem">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Ảnh
+                                    </div>
+                                </th>
+                                <th style="min-width: 6rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Size/Màu
+                                    </div>
+                                </th>
+                                <th style="min-width: 7rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Số lượng
+                                    </div>
+                                </th>
+                                <th style="min-width: 12rem;">
+                                    <div class="flex justify-content-between align-items-center">
+                                        Đơn giá (VND)
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr class="p-selectable-row" style="text-align: center;">
+                                <td>
+                                    <img [src]="item.productDetail.imageList[0].url"
+                                        style="width: 100px; height: 100px;border-radius: 20px;" />
+                                </td>
+                                <td class="product_name" style="font-weight: 600 !important;">
+                                    {{item.productDetail.size.name}}/{{ item.productDetail.color.name }}
+                                </td>
+                                <td class="o-quantity" style="text-align: center">
+                                    <span class="p-column-title">Số lượng</span>
+                                    {{ item.quantity }}
+                                </td>
+                                <td style="text-align: center">
+                                    <span class="p-column-title">Đơn giá</span>
+                                    {{ item.productDetail.price }}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p *ngIf="!userInfo.address" class="error-message"
+                    style=" color: red;font-weight: bold;margin-bottom: 10px;">Vui lòng thêm địa chỉ trước khi tiếp tục.
+                </p>
+                <div class="card c-address">
+                    <div class="card-header">
+                        Thông tin nhận hàng
+                    </div>
+                    <div class="body">
+                        <div class="input-group">
+                            <input type="text" class="i-fullname" name="fullName" [(ngModel)]="userInfo.username"
+                                disabled="true" />
+                            <label for="fullName">Họ Và Tên</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="i-phone" name="phone" [(ngModel)]="userInfo.numberPhone"
+                                disabled="true" />
+                            <label for="phone">Số Điện Thoại</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea pInputText id="fullAddress" rows="3" cols="30" name="fullAddress"
+                                [(ngModel)]="userInfo.address" pInputTextarea [autoResize]="true"
+                                disabled=""></textarea>
+                            <label for="">Địa Chỉ</label>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button (mousedown)="goToAddress()">Thay đổi địa chỉ</button>
+                    </div>
+                </div>
+                <div class="card c-info-payment">
+                    <div class="card-header">
+                        Thông tin Đơn hàng
+                    </div>
+                    <div class="body">
+                        <div class="row info-total-price">
+                            <div class="col-md-6">
+                                <p class="m-0">Tổng tiền</p>
+                            </div>
+                            <div class="col-md-6 l-price">
+                                <p class="m-0">{{totalAmount | currency:'VND':'symbol':'1.0-0' }}</p>
+                            </div>
+                        </div>
+                        <div class="row info-ship-price">
+                            <div class="col-md-6">
+                                <p class="m-0">Phí vận chuyển</p>
+                            </div>
+                            <div class="col-md-6 l-price">
+                                <img src="assets/img/logo/ghn.jpg"
+                                    style="width: 40px; height: auto; margin-right: 10px;" />
+                                <p class="m-0">{{shippingFee| currency:'VND':'symbol':'1.0-0'}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row info-total">
+                            <div class="col-md-6">
+                                <p class="m-0">Thành tiền</p>
+                            </div>
+                            <div class="col-md-6 l-price">
+                                <p class="m-0 l-total-price">{{(shippingFee + totalAmount)|
+                                    currency:'VND':'symbol':'1.0-0' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card c-method-payment">
+                    <button style="background-color: green;" (mousedown)="payment()">Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>

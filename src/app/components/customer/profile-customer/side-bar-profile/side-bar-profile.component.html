@@ -1,0 +1,85 @@
+<body class="side-part">
+    <p-panel [toggleable]="false">
+        <div class="user-wrapper">
+            <!-- <p-avatar [image]="response.image" size="large" shape="circle"
+                [style]="{'height': '100px','width': '100px'}" /> -->
+            <div class="user-title">
+                <h5 class="font-bold">
+                    {{response.fullName}}
+                </h5>
+                <span class="font-bold">
+                    {{response.role}}
+                </span>
+            </div>
+        </div>
+    </p-panel>
+
+    <div class="card flex justify-content-center">
+        <p-panelMenu [model]="items" styleClass="w-full md:w-20rem" />
+    </div>
+
+    <p-dialog header="Thay đổi mật khẩu" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }">
+        <span class="p-text-secondary block mb-5">Thay đổi mật khẩu giúp tăng khả năng bảo mật giữ liệu</span>
+        <form action="" style="margin: 20px 0px;">
+            <p-floatLabel>
+                <!-- <input pInputText id="password-old" name="password-old" [(ngModel)]="request.newPassword" /> -->
+                <p-password [(ngModel)]="request.oldPassword" id="password-old" name="password-old" [toggleMask]="true">
+                    <ng-template pTemplate="header">
+                        <h6>mức độ bảo mật</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider />
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li>có ít nhất 1 kí tự thường</li>
+                            <li>có ít nhất 1 kí tự hoa</li>
+                            <li>có ít nhất 1 số</li>
+                            <li>có ít nhất 8 ký tự</li>
+                        </ul>
+                    </ng-template>
+                </p-password>
+
+                <label for="password-old">Mật khẩu cũ</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <!-- <input pInputText id="password-new" name="password-new" [(ngModel)]="request.oldPassword" /> -->
+                <p-password id="password-new" name="password-new" [(ngModel)]="request.newPassword" [toggleMask]="true">
+                    <ng-template pTemplate="header">
+                        <h6>mức độ bảo mật</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider />
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li>có ít nhất 1 kí tự thường</li>
+                            <li>có ít nhất 1 kí tự hoa</li>
+                            <li>có ít nhất 1 số</li>
+                            <li>có ít nhất 8 ký tự</li>
+                        </ul>
+                    </ng-template>
+                </p-password>
+                <label for="password-new">Mật khẩu mới</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <p-password id="password-confirm" name="password-confirm" [(ngModel)]="request.confirmPassword"
+                    [toggleMask]="true">
+                    <ng-template pTemplate="header">
+                        <h6>mức độ bảo mật</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider />
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li>vui lòng nhập đúng mật khẩu</li>
+                        </ul>
+                    </ng-template>
+                </p-password>
+                <label for="password-confirm">Xác nhận mật khẩu</label>
+            </p-floatLabel>
+            <div class="row justify-content-end footer-dialog">
+                <button class="col-md-3 btn-cancel" (click)="closeDialog()">Quay Lại</button>
+                <button class="col-md-3 btn-done" (click)="confirmChangePassword($event)">Hoàn Thành</button>
+            </div>
+        </form>
+
+    </p-dialog>
+    <p-toast />
+    <p-confirmPopup />
+</body>

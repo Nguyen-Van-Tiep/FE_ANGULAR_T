@@ -1,0 +1,534 @@
+.side-bar {
+  grid-column: span 4;
+}
+
+body {
+  background-color: #e8e8e8;
+  display: grid;
+  width: 100%;
+  padding: 12px;
+  margin-top: 100px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* Chia thành 12 cột bằng nhau */
+  grid-gap: 43px;
+}
+
+section {
+  grid-column: span 8;
+}
+
+section p-panel {
+  margin: 0;
+}
+
+section p-panel ::ng-deep .p-panel {
+  background-color: transparent;
+  border-radius: 20px;
+  border-color: grey;
+
+  .p-panel-footer {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0px;
+
+    ul li {
+      margin-right: 5px;
+
+      a {
+        height: 36px;
+        width: 36px;
+        border-radius: 20px;
+        font-family: Quickstand, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+      }
+
+      a:hover {
+        color: white;
+        background-color: red;
+      }
+    }
+
+    .page-item.active a {
+      color: white;
+      background-color: red;
+    }
+  }
+
+  .p-panel-header {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0 !important;
+
+    button {
+      background-color: white;
+      border: 1px solid #ced4da;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 10px;
+      height: 36px;
+      align-items: center;
+      display: flex;
+    }
+
+    button:hover {
+      background-color: red;
+      color: white;
+      border-color: transparent;
+    }
+
+    .header-page {
+      padding: 0 !important;
+
+      .header-filter {
+        margin-top: 40px;
+        position: relative;
+
+        p-inputgroup .p-inputgroup {
+          height: 36px;
+
+          p-inputgroupaddon {
+            background-color: white;
+            border-right-color: transparent;
+            border-radius: 20px 0px 0px 20px;
+          }
+
+          input {
+            width: 1200px;
+            border-radius: 0px 20px 20px 0px;
+            border-left-color: transparent;
+          }
+        }
+
+        .btn-filter {
+          position: absolute;
+          left: auto;
+          right: 0px;
+
+          p-dropdown .p-dropdown {
+            height: 36px;
+            border-radius: 20px;
+            width: 220px;
+
+            ul {
+              padding: 0 !important;
+            }
+          }
+
+          .filter-item {
+            display: flex;
+            /* Sử dụng flexbox */
+            align-items: center;
+            /* Canh giữa các phần tử theo chiều dọc */
+          }
+
+          .filter-item div {
+            margin-right: 5px;
+            /* Khoảng cách giữa phần tử div và icon */
+          }
+        }
+      }
+    }
+  }
+
+  .p-panel-content {
+    position: relative;
+
+    .price {
+      right: 0;
+      left: auto;
+      position: absolute;
+    }
+  }
+
+  .p-panel .p-panel-footer {
+    padding: 10px;
+  }
+
+  p-table {
+    td {
+      font-family: Quickstand, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+
+      button {
+        width: 36px;
+        background-color: orange !important;
+        justify-content: center;
+        color: white;
+      }
+
+      button:hover {
+        background-color: red !important;
+        color: yellow !important;
+      }
+    }
+
+    .tb-product-name {
+      font-family: Quickstand, sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .tb-product-name:hover {
+      text-decoration: underline;
+      color: red;
+    }
+
+    img {
+      cursor: pointer;
+    }
+
+    .p-datatable-wrapper {
+      border-radius: 20px;
+    }
+  }
+
+  .order-info label {
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .order-info span {
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .label-code {
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    label {
+      font-size: 16px;
+    }
+
+    span {
+      font-size: 18px;
+      color: tomato;
+    }
+  }
+
+  .order-info .price span {
+    color: red;
+  }
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted h4 {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-content {
+  background-color: transparent;
+  margin-top: 30px;
+  border-color: transparent;
+  padding: 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .card {
+  margin-bottom: 10px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .p-panel-header {
+  display: block;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-header
+  .ng-star-inserted {
+  padding: 0;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address h5 {
+  padding-right: 10px;
+  border-right: 2px solid #ced4da;
+}
+
+section p-panel ::ng-deep .p-panel .p-toggleable-content .s-address span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .p-panel-content {
+  background-color: transparent;
+  margin-top: 0px !important;
+  border-color: transparent;
+  margin-left: 20px;
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card {
+  border-radius: 20px;
+}
+
+section
+  p-panel
+  ::ng-deep
+  .p-panel
+  .p-toggleable-content
+  .p-panel-content
+  .card
+  .p-panel-footer {
+  border-radius: 0px 0px 20px 20px;
+
+  button {
+    height: 36px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    font-family: Quickstand, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 10px;
+    color: white;
+    transition: filter 0.3s;
+  }
+
+  .btn-default {
+    background-color: green;
+  }
+
+  .btn-edit {
+    background-color: deepskyblue;
+  }
+
+  .btn-remove {
+    background-color: crimson;
+  }
+
+  .btn-rate {
+    background-color: #f97316;
+  }
+
+  button:hover {
+    filter: brightness(175%);
+  }
+}
+/* model css phần đánh giá sản phẩm */
+p-dialog ::ng-deep .p-dialog-draggable {
+  border-radius: 20px;
+  background-color: white;
+  .p-dialog-header,
+  .p-dialog-content {
+    background-color: transparent !important;
+  }
+
+  .p-dialog-content {
+    .col-md-10 {
+      transform: translate(-10px, 10px);
+      .rate-product-name {
+        font-size: 18px;
+        font-weight: 600;
+        padding-bottom: 5px;
+      }
+
+      .rate-product-brand {
+        margin-bottom: 10px;
+        span {
+          font-weight: 600;
+          margin-right: 5px;
+          font-size: 14px;
+        }
+        label {
+          font-weight: 500;
+          font-size: 16px;
+        }
+      }
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 20px;
+      height: 100% !important;
+      resize: none;
+    }
+
+    .icon-upload {
+      border-width: 2px; /* border-2 */
+      border-style: solid; /* assuming solid border, as the style is not specified */
+      border-radius: 50%; /* border-circle */
+      padding: 1.25rem; /* p-5 */
+      font-size: 6rem; /* text-8xl */
+      border-color: #ced4da;
+      color: #ced4da;
+    }
+
+    .drag-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    p-fileupload {
+      .p-fileupload-advanced {
+        border-radius: 20px;
+        border: 1px solid #ced4da;
+      }
+
+      .p-fileupload-buttonbar,
+      .p-fileupload-content {
+        border-color: transparent;
+        background-color: transparent;
+      }
+
+      .p-fileupload-buttonbar {
+        button {
+          background-color: transparent;
+          width: 30px;
+          height: 30px;
+          border-radius: 20px;
+          margin-right: 10px;
+        }
+      }
+
+      .btn-attachment {
+        color: #3b82f6;
+        border: 1px solid #3b82f6;
+      }
+
+      .btn-clear-file {
+        color: #ef4444;
+        border: 1px solid #ef4444;
+      }
+
+      .btn-attachment:hover {
+        background-color: #3b82f6;
+        color: white;
+      }
+
+      .btn-clear-file:hover {
+        background-color: #ef4444;
+        color: white;
+      }
+
+      .btn-clear-file:disabled {
+        opacity: 0.5;
+        color: #ef4444;
+        border: 1px solid #ef4444;
+        background-color: white;
+      }
+
+      .demo-image {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+
+        .ng-image {
+          border-radius: 20px;
+          width: 120px;
+          height: 120px;
+          margin-right: 10px;
+          position: relative;
+
+          img {
+            border-radius: 20px;
+            width: 120px;
+            height: 120px;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ced4da;
+          }
+          p-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0;
+            margin: 0;
+
+            button {
+              /* background-color: red;
+                            color: white; */
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              padding: 0;
+              margin: 0;
+            }
+
+            button:hover {
+              background-color: red;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn-confirm-rate {
+    margin-top: 10px;
+    button {
+      height: 36px;
+      margin-right: 10px;
+      border: 1px solid #ced4da;
+      font-family: Quickstand, sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 10px;
+      color: white;
+      transition: filter 0.3s;
+    }
+
+    .btn-default {
+      background-color: green;
+    }
+
+    .btn-edit {
+      background-color: deepskyblue;
+    }
+
+    .btn-edit:hover {
+      background-color: blue;
+    }
+
+    .btn-default:hover {
+      filter: brightness(175%);
+    }
+
+    .btn-default:disabled {
+      background-color: gray;
+    }
+  }
+}

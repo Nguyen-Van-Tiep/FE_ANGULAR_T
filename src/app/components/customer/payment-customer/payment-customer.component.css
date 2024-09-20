@@ -1,0 +1,266 @@
+.body-payment {
+  background-color: #e8e8e8;
+  padding-top: 100px;
+  font-family: Quickstand, sans-serif;
+
+  button {
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+  }
+
+  button:hover {
+    background-color: red !important;
+    color: #ced4da;
+  }
+
+  .header-payment {
+    margin-bottom: 10px;
+
+    button {
+      background-color: #f97316;
+      color: white;
+      height: 36px;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 0 20px;
+    }
+  }
+
+  .tb-product {
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  .c-address {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* padding: 20px; */
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+
+    .p-button {
+      border-radius: 20px;
+      border: 1px solid #ced4da;
+      font-weight: 600;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .p-button:hover {
+      background-color: red !important;
+    }
+
+    .card-header {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: #ced4da 2px solid;
+      padding: 10px 0px 10px 10px;
+      border-radius: 20px 20px 0px 0px;
+    }
+
+    .body {
+      .input-group {
+        position: relative;
+        margin: 0px 20px 20px 20px;
+
+        input {
+          border-radius: 20px !important;
+          border: 1px solid #ced4da;
+          padding: 10px 20px;
+          font-size: 16px;
+          font-family: Quickstand, sans-serif;
+          font-weight: 500;
+          width: 90%;
+          background-color: white;
+        }
+
+        label {
+          position: absolute;
+          top: -10px;
+          left: 25px;
+          background-color: white;
+          padding: 0 5px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        textarea {
+          border-radius: 20px !important;
+          border: 1px solid #ced4da;
+          padding: 10px 20px;
+          font-size: 16px;
+          font-family: Quickstand, sans-serif;
+          font-weight: 500;
+          width: 90%;
+          background-color: white;
+          /* don't overflow */
+          resize: none;
+          color: black !important;
+          opacity: 1;
+        }
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      margin: 0px 20px 20px 20px;
+
+      button {
+        border-radius: 20px;
+        border: 1px solid #ced4da;
+        font-weight: 600;
+        height: 36px;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+          box-shadow 0.2s;
+        padding: 0px 20px;
+        background-color: #43f834;
+        color: white;
+      }
+
+      button:hover {
+        background-color: red !important;
+      }
+    }
+  }
+
+  .c-info-payment {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+
+    .card-header {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: #ced4da 2px solid;
+      padding: 10px 0px 10px 10px;
+      border-radius: 20px 20px 0px 0px;
+    }
+
+    .body {
+      .row {
+        margin: 20px;
+
+        .l-price {
+          font-weight: 600;
+          /* hiển thị ở cuối thẻ div */
+          display: flex;
+          justify-content: end;
+          align-items: center;
+
+          .l-total-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+
+  .c-method-payment {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+
+    .card-header {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: #ced4da 2px solid;
+      padding: 10px 0px 10px 10px;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 0px 10px 10px 10px;
+      width: auto;
+      background-color: white !important;
+      input {
+        border-radius: 20px !important;
+        border: 1px solid #ced4da;
+        font-size: 16px;
+        font-family: Quickstand, sans-serif;
+        font-weight: 500;
+        background-color: white;
+        margin-right: 5px;
+      }
+    }
+
+    .input-group-text {
+      background-color: transparent;
+      border-color: transparent;
+      cursor: pointer;
+    }
+
+    .input-group-text:hover {
+      background-color: #f97316;
+      color: white;
+      font-weight: 600;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      margin: 0px 20px 20px 20px;
+
+      button {
+        border-radius: 20px;
+        border: 1px solid #ced4da;
+        font-weight: 600;
+        height: 36px;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+          box-shadow 0.2s;
+        padding: 0px 20px;
+        background-color: #ef4444;
+        color: white;
+      }
+
+      button:hover {
+        background-color: red !important;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+.body-payment p-table ::ng-deep .p-datatable .p-datatable-wrapper {
+  border-radius: 20px;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  td {
+    font-size: 16px;
+    font-family: Quickstand, sans-serif;
+    font-weight: 500;
+  }
+
+  tbody tr {
+    border-bottom: #ced4da 2px solid;
+  }
+}

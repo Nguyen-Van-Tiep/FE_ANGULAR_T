@@ -1,0 +1,137 @@
+.side-bar {
+  grid-column: span 4;
+}
+
+body {
+  background-color: #e8e8e8;
+  display: grid;
+  width: 100%;
+  padding: 12px;
+  margin-top: 100px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* Chia thành 12 cột bằng nhau */
+  grid-gap: 43px;
+}
+
+section {
+  grid-column: span 8;
+}
+
+section p-panel {
+  margin: 0;
+}
+section p-panel ::ng-deep .p-panel {
+  background-color: white;
+  border-radius: 20px;
+  border-color: grey;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted {
+  padding: 20px;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted h4 {
+  font-family: Quickstand, sans-serif;
+  font-weight: 600;
+}
+
+section p-panel ::ng-deep .p-panel .p-panel-header .ng-star-inserted span {
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section p-panel label {
+  font-family: Quickstand, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+section p-panel input[type="text"] {
+  border-radius: 20px;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #ced4da;
+  padding-left: 10px;
+}
+
+section p-panel ::ng-deep .p-panel-header {
+  border-radius: 20px 20px 0px 0px;
+}
+
+section p-panel ::ng-deep .p-panel-footer {
+  border-radius: 0px 0px 20px 20px;
+}
+
+section pInputText:focus {
+  border: 1px solid #ced4da !important;
+}
+section p-panel form .i-info {
+  margin: 60px 0px;
+}
+
+section p-panel p-inputgroup ::ng-deep .row {
+  width: 100%;
+}
+
+section p-panel p-inputgroup ::ng-deep .row .col-md-3 {
+  display: flex;
+}
+
+section p-panel p-inputgroup ::ng-deep p-radiobutton {
+  margin-right: 5px;
+}
+
+section p-panel p-inputgroup ::ng-deep p-calendar span input {
+  width: 100% !important;
+  height: 40px;
+  border-radius: 20px;
+}
+
+section p-panel p-inputgroup ::ng-deep p-calendar span {
+  width: 100% !important;
+}
+
+section p-panel ::ng-deep .p-panel-footer button {
+  border-radius: 20px;
+  height: 36px;
+  font-size: 16px;
+  background-color: coral;
+  border-color: transparent;
+  color: white;
+  font-weight: 600;
+  width: 120px;
+  margin: 10px;
+  font-family: Quickstand, sans-serif;
+}
+
+.btn-edit {
+  transform: translate(570%, 0%);
+}
+
+section p-panel ::ng-deep .p-panel-footer button:disabled {
+  background-color: gray !important;
+}
+
+section p-panel ::ng-deep .p-panel-footer button:hover {
+  background-color: orange;
+  border: 1px solid #ced4da;
+}
+
+section p-panel ::ng-deep .p-panel-footer .row button:first-child {
+  background-color: red;
+}
+
+section p-panel ::ng-deep .p-panel-footer .row button:first-child:hover {
+  background-color: crimson;
+}
+section p-panel ::ng-deep .p-panel-footer .row button:last-child {
+  background-color: greenyellow;
+}
+
+section p-panel ::ng-deep .p-panel-footer .row button:last-child:hover {
+  background-color: green;
+}

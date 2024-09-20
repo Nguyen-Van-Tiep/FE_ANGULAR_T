@@ -1,0 +1,268 @@
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9">
+                <div class="card">
+                    <div class="title">
+                        <h5>Thông Tin Chung</h5>
+                    </div>
+                    <div class="row">
+                        <label for="validationCustom01" class="form-label">Tên sản phẩm <span
+                                style="color: red;">*</span></label>
+                        <input type="text" name="name" class="form-control" id="validationCustom01"
+                            placeholder="Tên Sản phẩm" [(ngModel)]="product.productName" required>
+                        <div *ngIf="productNameError" class="error-message">{{ productNameError }}</div>
+                        <!-- <small>Tên sản phẩm là bắt buộc và nên là tên duy nhất.</small> -->
+                    </div>
+                    <div class="row">
+                        <label for="validationCustom02" class="form-label">Mô tả sản phẩm</label>
+                        <textarea rows="5" cols="30" name="desciption" pInputTextarea
+                            [(ngModel)]="product.description"></textarea>
+                        <div *ngIf="descriptionError" class="error-message">{{ descriptionError }}</div>
+                        <small>Đặt mô tả cho sản phẩm để hiển thị tốt hơn.</small>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="title">
+                                <span>Danh mục</span> <span style="color: red;">*</span>
+                            </div>
+                            <p-dropdown [options]="styles" [(ngModel)]="product.style" optionLabel="name"
+                                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn danh mục">
+                            </p-dropdown>
+                            <div *ngIf="selectedStyleError" class="error-message">{{ selectedStyleError }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="title">
+                                <span>Thương hiệu</span> <span style="color: red;">*</span>
+                            </div>
+                            <p-dropdown [options]="brands" [(ngModel)]="product.brand" optionLabel="name"
+                                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn thương hiệu">
+                            </p-dropdown>
+                            <div *ngIf="selectedBrandError" class="error-message">{{ selectedBrandError }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="title">
+                                <span>Đế giày</span> <span style="color: red;">*</span>
+                            </div>
+                            <p-dropdown [options]="soles" [(ngModel)]="product.sole" optionLabel="name" [filter]="true"
+                                filterBy="name" [showClear]="true" placeholder="Chọn đế giày">
+                            </p-dropdown>
+                            <div *ngIf="selectedSoleError" class="error-message">{{ selectedSoleError }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="title">
+                                <span>Chất liệu</span> <span style="color: red;">*</span>
+                            </div>
+                            <p-dropdown [options]="materials" [(ngModel)]="product.material" optionLabel="name"
+                                [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn chất liệu">
+                            </p-dropdown>
+                            <div *ngIf="selectedMaterialError" class="error-message">{{ selectedMaterialError }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card mt-3">
+                    <form (ngSubmit)="generateVariants()">
+                        <div class="row">
+                            <div class="col-md-6"> <label for="sizes">Size:</label>
+                                <div *ngFor="let size of sizes">
+                                    <input type="checkbox" [value]="size.id" (change)="onSizeChange($event)" /> {{
+                                    size.name }}
+                                </div>
+                            </div>
+                            <div class="col-md-6"> <label for="colors">Màu:</label>
+                                <div *ngFor="let color of colors">
+                                    <input type="checkbox" [value]="color.id" (change)="onColorChange($event)" /> {{
+                                    color.name
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Tạo danh sách</button>
+                    </form>
+                    <h3>Danh sách sản phẩm chi tiết:</h3>
+                    <p-table [value]="productDetails" [tableStyle]="{ 'min-width': '50rem' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width: 5rem">Kích cỡ</th>
+                                <th style="min-width: 5rem">Màu</th>
+                                <th style="min-width: 5rem">Số lượng</th>
+                                <th style="min-width: 5rem">Giá</th>
+                                <th style="min-width: 5rem">Trạng thái</th>
+                                <th style="min-width: 40rem">Ảnh</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product>
+                            <tr>
+                                <td>{{ product.size?.name }}</td>
+                                <td>{{ product.color?.name }}</td>
+                                <td><input type="text" [(ngModel)]="product.quantity" style="width: 50px;"></td>
+                                <td><input type="text" [(ngModel)]="product.price" style="width: 100px;"></td>
+                                <td>{{ product.status }}</td>
+                                <td>
+                                    <p-fileUpload name="files" [multiple]="true" accept="image/*"
+                                        maxFileSize="1000000000" (onSelect)="onSelectedFiles($event, product)">
+                                        <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback"
+                                            let-clearCallback="clearCallback" let-uploadCallback="uploadCallback">
+                                            <div
+                                                class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+                                                <div class="flex gap-2">
+                                                    <button (click)="fileInput.click()" class="btn-attachment">
+                                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                                    </button>
+                                                    <input #fileInput type="file" style="display:none"
+                                                        (change)="chooseFiles($event, product)" accept="image/*"
+                                                        multiple>
+                                                    <button class="btn-clear-file"
+                                                        [disabled]="!getImagesForProductDetail(product).length"
+                                                        (click)="onRemoveFile(product)">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="content">
+                                            <div>
+                                                <div class="flex flex-wrap p-0 sm:p-5 gap-5 demo-image">
+                                                    <div *ngFor="let image of getImagesForProductDetail(product)"
+                                                        class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3 ng-image">
+                                                        <div>
+                                                            <img role="presentation" [alt]="image.name"
+                                                                [src]="image.url" />
+                                                        </div>
+                                                        <p-button icon="fa fa-times"
+                                                            (click)="removeImages(product, image.name)"
+                                                            [outlined]="true" [rounded]="true" severity="danger" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template pTemplate="empty">
+                                            <div *ngIf="!getImagesForProductDetail(product).length"
+                                                class="flex align-items-center justify-content-center flex-column drag-image">
+                                                <i class="fa fa-upload icon-upload" aria-hidden="true"></i>
+                                            </div>
+                                        </ng-template>
+                                    </p-fileUpload>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div class="footer">
+                        <div class="row justify-content-end btn-add">
+                            <p-button label="Xác nhận" class="col-md-2" icon="fa fa-check" severity="success"
+                                iconPos="right" (click)="saveProduct()" />
+                        </div>
+                    </div>
+                </div> -->
+                <div class="card mt-3">
+                    <form (ngSubmit)="generateVariants()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="sizes">Size:</label>
+                                <div *ngFor="let size of sizes">
+                                    <input type="checkbox" [value]="size.id" (change)="onSizeChange($event)" /> {{
+                                    size.name }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="colors">Màu:</label>
+                                <div *ngFor="let color of colors">
+                                    <input type="checkbox" [value]="color.id" (change)="onColorChange($event)" /> {{
+                                    color.name }}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Tạo danh sách</button>
+                    </form>
+
+                    <h3>Danh sách sản phẩm chi tiết:</h3>
+                    <p-table [value]="groupedProductDetails" [tableStyle]="{ 'min-width': '50rem' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="min-width: 5rem">Kích cỡ</th>
+                                <th style="min-width: 5rem">Màu</th>
+                                <th style="min-width: 5rem">Số lượng</th>
+                                <th style="min-width: 5rem">Giá</th>
+                                <th style="min-width: 40rem">Ảnh</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-group>
+                            <!-- Hiển thị các biến thể cùng màu -->
+                            <ng-container *ngFor="let product of group.variants; let i = index">
+                                <tr>
+                                    <td>{{ product.size?.name }}</td>
+                                    <td>{{ group.color.name }}</td>
+                                    <td><input type="text" [(ngModel)]="product.quantity" style="width: 50px;"></td>
+                                    <td><input type="text" [(ngModel)]="product.price" style="width: 100px;"></td>
+                                    <!-- Hiển thị p-fileUpload chỉ một lần cho tất cả các biến thể cùng màu -->
+                                    <td *ngIf="i === 0" [attr.rowspan]="group.variants.length">
+                                        <p-fileUpload name="files" [multiple]="true" accept="image/*"
+                                            maxFileSize="1000000000" (onSelect)="onSelectedFiles($event, group.color)">
+                                            <ng-template pTemplate="header" let-files
+                                                let-chooseCallback="chooseCallback" let-clearCallback="clearCallback"
+                                                let-uploadCallback="uploadCallback">
+                                                <div
+                                                    class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+                                                    <div class="flex gap-2">
+                                                        <button (click)="fileInput.click()" class="btn-attachment">
+                                                            <i class="fa fa-file" aria-hidden="true"></i>
+                                                        </button>
+                                                        <input #fileInput type="file" style="display:none"
+                                                            (change)="chooseFiles($event, group.color)" accept="image/*"
+                                                            multiple>
+                                                        <button class="btn-clear-file"
+                                                            [disabled]="!getImagesForColor(group.color).length"
+                                                            (click)="onRemoveFile(group.color)">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="content">
+                                                <div>
+                                                    <div class="flex flex-wrap p-0 sm:p-5 gap-5 demo-image">
+                                                        <div *ngFor="let image of getImagesForColor(group.color)"
+                                                            class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3 ng-image">
+                                                            <div>
+                                                                <img role="presentation" [alt]="image.name"
+                                                                    [src]="image.url" />
+                                                            </div>
+                                                            <p-button icon="fa fa-times"
+                                                                (click)="removeImages(group.color, image.name)"
+                                                                [outlined]="true" [rounded]="true" severity="danger" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template pTemplate="empty">
+                                                <div *ngIf="!getImagesForColor(group.color).length"
+                                                    class="flex align-items-center justify-content-center flex-column drag-image">
+                                                    <i class="fa fa-upload icon-upload" aria-hidden="true"></i>
+                                                </div>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-template>
+                    </p-table>
+
+                    <div class="footer">
+                        <div class="row justify-content-end btn-add">
+                            <p-button label="Xác nhận" class="col-md-2" icon="fa fa-check" severity="success"
+                                iconPos="right" (click)="saveProduct()" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<p-toast></p-toast>
